@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Gropement extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'logo',
+        'nomAssociation',
+        'abrevation',
+        'nom-res',
+        'pays',
+        'ville',
+        'adresse',
+        'tel',
+        'email',
+        'password'
+    ];
 }
