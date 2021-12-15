@@ -3,20 +3,9 @@
 @section('content')
 @push('head')
         <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/templatemo-chain-app-dev.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animated.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/owl.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 @endpush
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
@@ -38,7 +27,7 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
               <img src="{{asset('images/logo.png')}}" alt="Chain App Dev">
             </a>
             <!-- ***** Logo End ***** -->
@@ -49,8 +38,9 @@
               <li class="scroll-to-section"><a href="#about">About</a></li>
               <li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
               <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
-              <li><div class="gradient-button"><a id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
-            </ul>        
+              <li><div class="gradient-button"><a href="{{route('register')}}">Sign In Now</a></div></li>
+              <li><div class="gradient-button"><a href="{{route('login')}}">Login</a></div></li>
+            </ul>
             <a class='menu-trigger'>
                 <span>Menu</span>
             </a>
@@ -61,7 +51,7 @@
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
-  
+
   <div id="modal" class="popupContainer" style="display:none;">
     <div class="popupHeader">
         <span class="header_title">Login</span>
@@ -414,7 +404,7 @@
                       </div>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div class="col-lg-5">
                   <ul class="nacc">
                     <li class="active">
@@ -528,7 +518,7 @@
                       </div>
                     </li>
                   </ul>
-                </div>          
+                </div>
               </div>
             </div>
           </div>
@@ -609,7 +599,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 
   <footer id="newsletter">
     <div class="container">
@@ -690,9 +680,9 @@
         </div>
         <div class="col-lg-12">
           <div class="copyright-text">
-            <p>Copyright © 2022 Chain App Dev Company. All Rights Reserved. 
+            <p>Copyright © 2022 Chain App Dev Company. All Rights Reserved.
           <br>Design: <a href="https://templatemo.com/" target="_blank" title="css templates">TemplateMo</a><br>
-        
+
           Distributed By: <a href="https://themewagon.com/" target="_blank" title="Bootstrap Template World">ThemeWagon</a>
         </p>
           </div>

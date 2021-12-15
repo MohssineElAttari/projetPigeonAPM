@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GropementController extends Controller
+class AssociationGroupController extends Controller
 {
     //
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssociationsTable extends Migration
+class CreateAssociationGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,23 @@ class CreateAssociationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('associations', function (Blueprint $table) {
+        Schema::create('association_groups', function (Blueprint $table) {
             $table->id();
-            $table->string("nom");
-            $table->string("prenom");
+            $table->string("logo");
+            $table->string("nom_asso");
+            $table->string("type");
+            $table->string("prenom_res");
+            $table->string("nom_res");
             $table->string("abreviation");
             $table->integer("tel");
             $table->integer("fix");
-            $table->text("adress");
+            $table->text("adresse");
             $table->string("pays");
             $table->string("ville");
-            $table->string("page_facebook");
+            $table->string("page");
             $table->boolean("active");
             $table->string("email")->unique();
-            $table->boolean("password");
-
+            $table->string("password");
             $table->timestamps();
         });
     }
@@ -39,6 +41,8 @@ class CreateAssociationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('associations');
+        Schema::dropIfExists('association_groups');
     }
 }
+
+
