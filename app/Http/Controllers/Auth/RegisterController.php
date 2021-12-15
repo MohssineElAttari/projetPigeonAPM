@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Association;
+use App\Models\Gropement;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,12 +51,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        dd($data);
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        // dd($data['type']);
+            return Validator::make($data, [
+                'logo' => ['required', 'string', 'max:255'],
+                'nomAssociation' => ['required', 'string', 'max:255'],
+                'abrevation' => ['required', 'string', 'max:255'],
+                'nom-res' => ['required', 'string', 'max:255'],
+                'pre-res' => ['required', 'string', 'max:255'],
+                'pays' => ['required', 'string', 'max:255'],
+                'ville' => ['required', 'string', 'max:255'],
+                'adresse' => ['required', 'string', 'max:255'],
+                'tel' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
     }
 
     /**
@@ -66,10 +76,32 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // die($data);
-        return User::create([
-            'name' => $data['name'],
+        if($data['type']=="Association"){
+        return Association::create([
+            'logo' => $data['name'],
+            'nomAssociation' => $data['email'],
+            'abrevation' => $data['name'],
+            'nom-res' => $data['email'],
+            'pays' => $data['email'],
+            'ville' => $data['email'],
+            'adresse' => $data['email'],
+            'tel' => $data['email'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }else{
+        return Gropement::create([
+            'logo' => $data['name'],
+            'nomAssociation' => $data['email'],
+            'abrevation' => $data['name'],
+            'nom-res' => $data['email'],
+            'pays' => $data['email'],
+            'ville' => $data['email'],
+            'adresse' => $data['email'],
+            'tel' => $data['email'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+    }
     }
 }
