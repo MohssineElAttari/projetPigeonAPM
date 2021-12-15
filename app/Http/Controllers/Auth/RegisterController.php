@@ -53,17 +53,17 @@ class RegisterController extends Controller
     {
         // dd($data['type']);
             return Validator::make($data, [
-                'logo' => ['required', 'string', 'max:255'],
-                'nomAssociation' => ['required', 'string', 'max:255'],
-                'abrevation' => ['required', 'string', 'max:255'],
-                'nom-res' => ['required', 'string', 'max:255'],
-                'pre-res' => ['required', 'string', 'max:255'],
-                'pays' => ['required', 'string', 'max:255'],
-                'ville' => ['required', 'string', 'max:255'],
-                'adresse' => ['required', 'string', 'max:255'],
-                'tel' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                // 'logo' => ['required', 'string', 'max:255'],
+                // 'nomAssociation' => ['required', 'string', 'max:255'],
+                // 'abrevation' => ['required', 'string', 'max:255'],
+                // 'nom-res' => ['required', 'string', 'max:255'],
+                // 'pre-res' => ['required', 'string', 'max:255'],
+                // 'pays' => ['required', 'string', 'max:255'],
+                // 'ville' => ['required', 'string', 'max:255'],
+                // 'adresse' => ['required', 'string', 'max:255'],
+                // 'tel' => ['required', 'string', 'max:255'],
+                // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
     }
 
@@ -78,14 +78,15 @@ class RegisterController extends Controller
         // die($data);
         if($data['type']=="Association"){
         return Association::create([
-            'logo' => $data['name'],
-            'nomAssociation' => $data['email'],
-            'abrevation' => $data['name'],
-            'nom-res' => $data['email'],
-            'pays' => $data['email'],
-            'ville' => $data['email'],
-            'adresse' => $data['email'],
-            'tel' => $data['email'],
+            'nom' => $data['nomAssociation'],
+            'prenom' => $data['nom-res'],
+            'logo' => $data['logo'],
+            'abreviation' => $data['abrevation'],
+            'pays' => $data['pays'],
+            'ville' => $data['ville'],
+            'adress' => $data['adress'],
+            'tel' => $data['tel'],
+            'fix' => $data['fix'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
