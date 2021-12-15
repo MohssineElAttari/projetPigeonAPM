@@ -81,91 +81,114 @@
 @section('content')
 @push('head')
 <!-- Styles -->
-<link href="{{ asset('css/wizard.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{{asset('css/main.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="{{asset('css/wizard/style.css')}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 <!-- Scripts -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
-<script defer src="{{asset('js/main.js')}}"></script>
+
+<script defer src="{{asset('jquery/jquery.min.js')}}"></script>
+<script defer src="{{asset('jquery/jquery.steps.js')}}"></script>
+<script defer src="{{asset('js/wizard/main.js')}}"></script>
 @endpush
-<form method="POST" action="">
-    <div class="container">
-        <div id="app">
-            <step-navigation :steps="steps" :currentstep="currentstep">
-            </step-navigation>
-            
-            <div v-show="currentstep == 1">
-                <h3>Step 1</h3>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
-            </div>
-    
-            <div v-show="currentstep == 2">
-                <h3>Step 2</h3>
-                <div class="form-group">
-                    <label for="select">Example select</label>
-                    <select class="form-control" name="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-            </div>
-    
-            <div v-show="currentstep == 3">
-                <h3>Step 3</h3>
-                <div class="form-group">
-                    <label for="textarea">Example textarea</label>
-                    <textarea class="form-control" name="textarea" rows="4"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="file">File input</label>
-                    <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-                </div>
-            </div>
-    
-            <step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged">
-            </step>
-    
-            <script type="x-template" id="step-navigation-template">
-                <ol class="step-indicator">
-                    <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
-                    </li>
-                </ol>
-            </script>
-    
-            <script type="x-template" id="step-navigation-step-template">
-                <li :class="indicatorclass">
-                    <div class="step"><i :class="step.icon_class"></i></div>
-                    <div class="caption hidden-xs hidden-sm">Step <span v-text="step.id"></span>: <span v-text="step.title"></span></div>
-                </li>
-            </script>
-    
-            <script type="x-template" id="step-template">
-                <div class="step-wrapper" :class="stepWrapperClass">
-                    <button type="button" class="btn btn-primary" @click="lastStep" :disabled="firststep">
-                        Back
-                    </button>
-                    <button type="button" class="btn btn-primary" @click="nextStep" :disabled="laststep">
-                        Next
-                    </button>
-                    <button type="submit" class="btn btn-primary" v-if="laststep">
-                        Submit
-                    </button>
-                </div>
-            </script>
-        </div>
+<div class="model">
+    <div class="box">
+        <button>Association</button>
+        <button>Groupment</button>
     </div>
+</div>
+<div class="wrapper">
+    <div class="image-holder">
+        <img src="{{asset('images/wizard/background.jpg')}}" alt="">
+    </div>
+    <form id="form-register"  method="POST" action="{{ route('register') }}">
+        @csrf
+        <div id="wizard">
+            <!-- SECTION 1 -->
+            <h4></h4>
+            <section>
+                <input type="hidden" name="type" id="type_reg">
+                <div class="form-row form-group">
+                    <div class="form-holder">
+                        <label for="logo">
+                            Logo *
+                        </label>
+                        <input type="file" id="logo" class="form-control required">
+                    </div>
+                    <div class="form-holder">
+                        <label for="nom">
+                            Nom de <span>l’association</span> *
+                        </label>
+                        <input type="text" class="form-control required" id="nom">
+                    </div>
+                </div>	
+                <div class="form-row">
+                    <label for="abbr">
+                        Abréviation
+                    </label>
+                    <input type="text" class="form-control required" id="abbr">
+                </div>	
+                <div class="form-row form-group">
+                    <div class="form-holder">
+                        <label for="nom-res">
+                            Nom responsable *
+                        </label>
+                        <input type="text" class="form-control required" id='nom-res'>
+                    </div>
+                    <div class="form-holder">
+                        <label for="pre-res">
+                            prénom responsable *
+                        </label>
+                        <input type="text" class="form-control required"  id='pre-res'>
+                    </div>
+                </div>	
+            </section>
+            
+            <!-- SECTION 2 -->
+            <h4></h4>
+            <section>
+                <div class="form-row">
+                    <div class="form-row form-group">
+                        <div class="form-holder">
+                            <label for="pays">
+                                Pays *
+                            </label>
+                            <input type="text" id="pays" name="pays" class="form-control required">
+                        </div>
+                        <div class="form-holder">
+                            <label for="ville">
+                                Ville *
+                            </label>
+                            <input type="text" id="ville" name="ville" class="form-control required">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="adresse">
+                            Adresse *
+                        </label>
+                        <input type="text" name="adresse" id="adresse" class="form-control required">
+                    </div>	
+                    <label for="tel">
+                        Téléphone *
+                    </label>
+                    <input type="text" name="tel" id="tel" class="form-control required">
+                </div>
+                <div class="form-row">
+                    <label for="email">
+                        Email *
+                    </label>
+                    <input type="text" name="email" class="form-control required" id="email">
+                </div>
+                <div class="form-row">
+                    <label for="pg-fb">
+                        Page facebook *
+                    </label>
+                    <input type="text" name="page" class="form-control required" id="pg-fb">
+                </div>
+            </section>
+        </div>
     </form>
+</div>
 @endsection
