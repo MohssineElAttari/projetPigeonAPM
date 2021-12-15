@@ -19,12 +19,13 @@ class CreateGropementsTable extends Migration
             $table->string("prenom");
             $table->integer("tel");
             $table->integer("fix");
-            $table->string("email");
             $table->string("adress");
             $table->string("paye");
             $table->string("ville");
             $table->integer("page_facebook");
             $table->boolean("active");
+            $table->string("email")->unique();
+            $table->boolean("password");
 
             $table->timestamps();
         });

@@ -20,13 +20,13 @@ class CreateAssociationsTable extends Migration
             $table->string("abreviation");
             $table->integer("tel");
             $table->integer("fix");
-            $table->string("email");
             $table->text("adress");
             $table->string("pays");
             $table->string("ville");
             $table->string("page_facebook");
             $table->boolean("active");
-
+            $table->string("email")->unique();
+            $table->boolean("password");
 
             $table->timestamps();
         });

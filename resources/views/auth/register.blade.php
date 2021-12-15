@@ -1,6 +1,6 @@
 @extends('layouts.app')
-{{-- 
-@section('content')
+
+{{-- @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -73,9 +73,7 @@
             </div>
         </div>
     </div>
-</div>
-@endsection --}}
-
+</div> --}}
 
 
 @section('content')
@@ -115,33 +113,33 @@
                         <label for="logo">
                             Logo *
                         </label>
-                        <input type="file" id="logo" class="form-control required">
+                        <input type="file" id="logo" name="logo" class="form-control required">
                     </div>
                     <div class="form-holder">
                         <label for="nom">
                             Nom de <span>l’association</span> *
                         </label>
-                        <input type="text" class="form-control required" id="nom">
+                        <input type="text" class="form-control required" name="nomAssociation" id="nom">
                     </div>
                 </div>	
                 <div class="form-row">
                     <label for="abbr">
                         Abréviation
                     </label>
-                    <input type="text" class="form-control required" id="abbr">
+                    <input type="text" name="abrevation" class="form-control required" id="abbr">
                 </div>	
                 <div class="form-row form-group">
                     <div class="form-holder">
                         <label for="nom-res">
                             Nom responsable *
                         </label>
-                        <input type="text" class="form-control required" id='nom-res'>
+                        <input type="text" class="form-control required" name="nom-res" id='nom-res'>
                     </div>
                     <div class="form-holder">
                         <label for="pre-res">
                             prénom responsable *
                         </label>
-                        <input type="text" class="form-control required"  id='pre-res'>
+                        <input type="text" class="form-control required" name="pre-res"  id='pre-res'>
                     </div>
                 </div>	
             </section>
@@ -179,13 +177,19 @@
                     <label for="email">
                         Email *
                     </label>
-                    <input type="text" name="email" class="form-control required" id="email">
+                    <input type="email" name="email" class="form-control required" id="email">
                 </div>
                 <div class="form-row">
                     <label for="pg-fb">
                         Page facebook *
                     </label>
                     <input type="text" name="page" class="form-control required" id="pg-fb">
+                </div>
+                <div class="form-row">
+                    <label for="email">
+                        Password *
+                    </label>
+                    <input type="password" name="password" class="form-control required" id="email">
                 </div>
             </section>
         </div>
