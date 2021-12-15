@@ -78,8 +78,9 @@ class RegisterController extends Controller
         // die($data);
         if($data['type']=="Association"){
         return Association::create([
-            'nom' => $data['nomAssociation'],
-            'prenom' => $data['nom-res'],
+            'nomAssociation' => $data['nomAssociation'],
+            'prenomRes' => $data['prenomRes'],
+            'nomRes' => $data['nomRes'],
             'logo' => $data['logo'],
             'abreviation' => $data['abrevation'],
             'pays' => $data['pays'],
@@ -93,13 +94,14 @@ class RegisterController extends Controller
     }else{
         return Gropement::create([
             'logo' => $data['name'],
-            'nomAssociation' => $data['email'],
-            'abrevation' => $data['name'],
-            'nom-res' => $data['email'],
-            'pays' => $data['email'],
-            'ville' => $data['email'],
-            'adresse' => $data['email'],
-            'tel' => $data['email'],
+            'nomAssociation' => $data['nomAssociation'],
+            'prenomRes' => $data['prenomRes'],
+            'nomRes' => $data['nomRes'],
+            'abrevation' => $data['abrevation'],
+            'pays' => $data['pays'],
+            'ville' => $data['ville'],
+            'adresse' => $data['adresse'],
+            'tel' => $data['tel'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
