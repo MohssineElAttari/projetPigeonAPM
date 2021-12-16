@@ -78,9 +78,9 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected function create(Request $request)
+    protected function create(array $data)
     {
-        die($request);
+        dd($data);
         $image_name = time() . '.' . $data['logo']->extension();
         $data['logo'] = $image_name;
         $data['logo']->image_question->move(public_path('images'), $image_name);
