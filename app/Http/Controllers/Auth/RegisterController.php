@@ -80,13 +80,13 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        dd($data);
+        // dd($data);
         $image_name = time() . '.' . $data['logo']->extension();
-        $data['logo'] = $image_name;
-        $data['logo']->image_question->move(public_path('images'), $image_name);
+        // $data['logo'] = $image_name;
+        $data['logo']->move(public_path('images/logo'), $image_name);
 
         return AssociationGroup::create([
-            'logo' => $data['logo'],
+            'logo' => $image_name,
             'nom_asso' => $data['nom_asso'],
             'type'=> $data['type'],
             'prenom_res' => $data['prenom_res'],
