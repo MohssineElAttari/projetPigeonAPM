@@ -84,7 +84,7 @@ class RegisterController extends Controller
         $image_name = time() . '.' . $data['logo']->extension();
         // $data['logo'] = $image_name;
         $data['logo']->move(public_path('images/logo'), $image_name);
-
+        
         return AssociationGroup::create([
             'logo' => $image_name,
             'nom_asso' => $data['nom_asso'],
