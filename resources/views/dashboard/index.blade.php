@@ -1,576 +1,370 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
 @push('head')
-<link rel="stylesheet" href="{{asset('vendors/dashboard/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{asset('vendors/dashboard/base/vendor.bundle.base.css')}}">
-<!-- endinject -->
-<!-- plugin css for this page -->
-<link rel="stylesheet" href="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.css')}}">
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}">
-<!-- endinject -->
-<link rel="shortcut icon" href="{{asset('images/dashboard/favicon.png')}}" />
+{{-- style --}}
+<link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.min.css')}}" />
+<link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap-responsive.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/dashboard/fullcalendar.css')}}" />
+<link rel="stylesheet" href="{{ asset('css/dashboard/maruti-style.css')}}" />
+<link rel="stylesheet" href="{{ asset('css/dashboard/maruti-media.css')}}" class="skin-color" />
 
-  <!-- container-scroller -->
+{{-- scrpt --}}
+<script defer src="{{ asset('js/dashboard/excanvas.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/jquery.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/jquery.ui.custom.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/bootstrap.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/jquery.flot.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/jquery.flot.resize.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/jquery.peity.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/fullcalendar.min.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/maruti.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/maruti.dashboard.js')}}"></script> 
+<script defer src="{{ asset('js/dashboard/maruti.chat.js')}}"></script> 
 
-  <!-- plugins:js -->
-  <script src="{{asset('vendors/dashboard/base/vendor.bundle.base.js')}}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="{{asset('vendors/dashboard/chart.js/Chart.min.js')}}"></script>
-  <script src="{{asset('vendors/dashboard/datatables.net/jquery.dataTables.js')}}"></script>
-  <script src="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="{{asset('js/dashboard/off-canvas.js')}}"></script>
-  <script src="{{asset('js/dashboard/hoverable-collapse.js')}}"></script>
-  <script src="{{asset('js/dashboard/template.js')}}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{asset('js/dashboard/dashboard.js')}}"></script>
-  <script src="{{asset('js/dashboard/data-table.js')}}"></script>
-  <script src="{{asset('js/dashboard/jquery.dataTables.js')}}"></script>
-  <script src="{{asset('js/dashboard/dataTables.bootstrap4.js')}}"></script>
-  <!-- End custom js for this page-->
+
+<script defer type="text/javascript">
+   // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+// if url is empty, skip the menu dividers and reset the menu selection to default
+if (newURL != "") {
+
+    // if url is "-", it is this page -- reset the menu:
+    if (newURL == "-" ) {
+        resetMenu();            
+    } 
+    // else, send page to designated URL            
+    else {  
+      document.location.href = newURL;
+    }
+}
+}
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+document.gomenu.selector.selectedIndex = 2;
+}
+</script>
   @endpush
-  <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
-    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="navbar-brand-wrapper d-flex justify-content-center">
-        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('images/dashboard/logo.svg')}}" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('images/dashboard/logo-mini.svg')}}" alt="logo"/></a>
-          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-sort-variant"></span>
-          </button>
-        </div>  
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <ul class="navbar-nav mr-lg-4 w-100">
-          <li class="nav-item nav-search d-none d-lg-block w-100">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="search">
-                  <i class="mdi mdi-magnify"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search">
-            </div>
-          </li>
+<!--Header-part-->
+<div id="header">
+  <h1><a href="dashboard.html">Maruti Admin</a></h1>
+</div>
+<!--close-Header-part--> 
+
+<!--top-Header-messaages-->
+<div class="btn-group rightzero"> <a class="top_message tip-left" title="Manage Files"><i class="icon-file"></i></a> <a class="top_message tip-bottom" title="Manage Users"><i class="icon-user"></i></a> <a class="top_message tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a> <a class="top_message tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a> </div>
+<!--close-top-Header-messaages--> 
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+    <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
+    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a class="sAdd" title="" href="#">new message</a></li>
+        <li><a class="sInbox" title="" href="#">inbox</a></li>
+        <li><a class="sOutbox" title="" href="#">outbox</a></li>
+        <li><a class="sTrash" title="" href="#">trash</a></li>
+      </ul>
+    </li>
+    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+  </ul>
+</div>
+<div id="search">
+  <input type="text" placeholder="Search here..."/>
+  <button type="submit" class="tip-left" title="Search"><i class="icon-search icon-white"></i></button>
+</div>
+<!--close-top-Header-menu-->
+
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a><ul>
+    <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+    <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>
+    <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>Widgets</span></a> </li>
+    <li><a href="tables.html"><i class="icon icon-th"></i> <span>Tables</span></a></li>
+    <li><a href="grid.html"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Forms</span> <span class="label label-important">3</span></a>
+      <ul>
+        <li><a href="form-common.html">Basic Form</a></li>
+        <li><a href="form-validation.html">Form with Validation</a></li>
+        <li><a href="form-wizard.html">Form with Wizard</a></li>
+      </ul>
+    </li>
+    <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
+    <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Eelements</span></a></li>
+    <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Addons</span> <span class="label label-important">4</span></a>
+      <ul>
+        <li><a href="index2.html">Dashboard2</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="chat.html">Chat option</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+  </div>
+  <div class="container-fluid">
+   	<div class="quick-actions_homepage">
+    <ul class="quick-actions">
+          <li> <a href="#"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
+          <li> <a href="#"> <i class="icon-shopping-bag"></i> Shopping Cart</a> </li>
+          <li> <a href="#"> <i class="icon-web"></i> Web Marketing </a> </li>
+          <li> <a href="#"> <i class="icon-people"></i> Manage Users </a> </li>
+          <li> <a href="#"> <i class="icon-calendar"></i> Manage Events </a> </li>
         </ul>
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
-            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-message-text mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="{{asset('images/dashboard/faces/face4.jpg')}}" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">David Grey
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    The meeting is cancelled
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="{{asset('images/dashboard/faces/face2.jpg')}}" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Tim Cook
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    New product launch
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="{{asset('images/dashboard/faces/face3.jpg')}}" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal"> Johnson
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    Upcoming board meeting
-                  </p>
-                </div>
-              </a>
+   </div>
+   
+    <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
+          <h5>Site Analytics</h5>
+          <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Update stats</a></div>
+        </div>
+        <div class="widget-content">
+          <div class="row-fluid">
+            <div class="span8">
+              <div class="chart"></div>
             </div>
-          </li>
-          <li class="nav-item dropdown mr-4">
-            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-success">
-                    <i class="mdi mdi-information mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Application Error</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Just now
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-warning">
-                    <i class="mdi mdi-settings mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Settings</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Private message
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-info">
-                    <i class="mdi mdi-account-box mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">New user registration</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    2 days ago
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="{{asset('images/dashboard/faces/face5.jpg')}}" alt="profile"/>
-              <span class="nav-profile-name">Louis Barnett</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="mdi mdi-settings text-primary"></i>
-                Settings
-              </a>
-              <a class="dropdown-item">
-                <i class="mdi mdi-logout text-primary"></i>
-                Logout
-              </a>
-            </div>
-          </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="mdi mdi-menu"></span>
-        </button>
-      </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="mdi mdi-home menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="mdi mdi-circle-outline menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+            <div class="span4">
+              <ul class="stat-boxes2">
+                <li>
+                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+10%</div>
+                  <div class="right"> <strong>15598</strong> Visits </div>
+                </li>
+                <li>
+                  <div class="left peity_line_neutral"><span><span style="display: none;">10,15,8,14,13,10,10,15</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>10%</div>
+                  <div class="right"> <strong>150</strong> New Users </div>
+                </li>
+                <li>
+                  <div class="left peity_bar_bad"><span><span style="display: none;">3,5,6,16,8,10,6</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>-40%</div>
+                  <div class="right"> <strong>4560</strong> Orders</div>
+                </li>
+                <li>
+                  <div class="left peity_line_good"><span><span style="display: none;">12,6,9,13,14,10,17</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+60%</div>
+                  <div class="right"> <strong>936</strong> Register </div>
+                </li>
               </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('membre')}}">
-              <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Form elements</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="mdi mdi-chart-pie menu-icon"></i>
-              <span class="menu-title">Charts</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/icons/mdi.html">
-              <i class="mdi mdi-emoticon menu-icon"></i>
-              <span class="menu-title">Icons</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="documentation/documentation.html">
-              <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-              <span class="menu-title">Documentation</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex align-items-end flex-wrap">
-                  <div class="mr-md-3 mr-xl-5">
-                    <h2>Welcome back,</h2>
-                    <p class="mb-md-0">Your analytics dashboard template.</p>
-                  </div>
-                  <div class="d-flex">
-                    <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-                    <p class="text-primary mb-0 hover-cursor">Analytics</p>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-end flex-wrap">
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
-                    <i class="mdi mdi-download text-muted"></i>
-                  </button>
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-clock-outline text-muted"></i>
-                  </button>
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-plus text-muted"></i>
-                  </button>
-                  <button class="btn btn-primary mt-2 mt-xl-0">Download report</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body dashboard-tabs p-0">
-                  <ul class="nav nav-tabs px-4" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Sales</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="false">Purchases</a>
-                    </li>
-                  </ul>
-                  <div class="tab-content py-0 px-0">
-                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                      <div class="d-flex flex-wrap justify-content-xl-between">
-                        <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Start date</small>
-                            <div class="dropdown">
-                              <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                <a class="dropdown-item" href="#">21 Oct 2018</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Revenue</small>
-                            <h5 class="mr-2 mb-0">$577545</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total views</small>
-                            <h5 class="mr-2 mb-0">9833550</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Downloads</small>
-                            <h5 class="mr-2 mb-0">2233783</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Flagged</small>
-                            <h5 class="mr-2 mb-0">3497843</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
-                      <div class="d-flex flex-wrap justify-content-xl-between">
-                        <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Start date</small>
-                            <div class="dropdown">
-                              <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                <a class="dropdown-item" href="#">21 Oct 2018</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Downloads</small>
-                            <h5 class="mr-2 mb-0">2233783</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total views</small>
-                            <h5 class="mr-2 mb-0">9833550</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Revenue</small>
-                            <h5 class="mr-2 mb-0">$577545</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Flagged</small>
-                            <h5 class="mr-2 mb-0">3497843</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane fade" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
-                      <div class="d-flex flex-wrap justify-content-xl-between">
-                        <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Start date</small>
-                            <div class="dropdown">
-                              <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                <a class="dropdown-item" href="#">21 Oct 2018</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Revenue</small>
-                            <h5 class="mr-2 mb-0">$577545</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total views</small>
-                            <h5 class="mr-2 mb-0">9833550</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Downloads</small>
-                            <h5 class="mr-2 mb-0">2233783</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Flagged</small>
-                            <h5 class="mr-2 mb-0">3497843</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-7 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Cash deposits</p>
-                  <p class="mb-4">To start a blog, think of a topic about and first brainstorm party is ways to write details</p>
-                  <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
-                  <canvas id="cash-deposits-chart"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Total sales</p>
-                  <h1>$ 28835</h1>
-                  <h4>Gross sales over the years</h4>
-                  <p class="text-muted">Today, many people rely on computers to do homework, work, and create or store useful information. Therefore, it is important </p>
-                  <div id="total-sales-chart-legend"></div>                  
-                </div>
-                <canvas id="total-sales-chart"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Recent Purchases</p>
-                  <div class="table-responsive">
-                    <table id="recent-purchases-listing" class="table">
-                      <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status report</th>
-                            <th>Office</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Gross amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td>Jeremy Ortega</td>
-                            <td>Levelled up</td>
-                            <td>Catalinaborough</td>
-                            <td>$790</td>
-                            <td>06 Jan 2018</td>
-                            <td>$2274253</td>
-                        </tr>
-                        <tr>
-                            <td>Alvin Fisher</td>
-                            <td>Ui design completed</td>
-                            <td>East Mayra</td>
-                            <td>$23230</td>
-                            <td>18 Jul 2018</td>
-                            <td>$83127</td>
-                        </tr>
-                        <tr>
-                            <td>Emily Cunningham</td>
-                            <td>support</td>
-                            <td>Makennaton</td>
-                            <td>$939</td>
-                            <td>16 Jul 2018</td>
-                            <td>$29177</td>
-                        </tr>
-                        <tr>
-                            <td>Minnie Farmer</td>
-                            <td>support</td>
-                            <td>Agustinaborough</td>
-                            <td>$30</td>
-                            <td>30 Apr 2018</td>
-                            <td>$44617</td>
-                        </tr>
-                        <tr>
-                            <td>Betty Hunt</td>
-                            <td>Ui design not completed</td>
-                            <td>Lake Sandrafort</td>
-                            <td>$571</td>
-                            <td>25 Jun 2018</td>
-                            <td>$78952</td>
-                        </tr>
-                        <tr>
-                            <td>Myrtie Lambert</td>
-                            <td>Ui design completed</td>
-                            <td>Cassinbury</td>
-                            <td>$36</td>
-                            <td>05 Nov 2018</td>
-                            <td>$36422</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob Kennedy</td>
-                            <td>New project</td>
-                            <td>Cletaborough</td>
-                            <td>$314</td>
-                            <td>12 Jul 2018</td>
-                            <td>$34167</td>
-                        </tr>
-                        <tr>
-                            <td>Ernest Wade</td>
-                            <td>Levelled up</td>
-                            <td>West Fidelmouth</td>
-                            <td>$484</td>
-                            <td>08 Sep 2018</td>
-                            <td>$50862</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
-          </div>
-        </footer>
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
+            <h5>Latest Posts</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <ul class="recent-posts">
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av1.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av2.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av4.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
+                </div>
+              <li>
+                <button class="btn btn-warning btn-mini">View All</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-refresh"></i> </span>
+            <h5>News updates</h5>
+          </div>
+          <div class="widget-content nopadding updates">
+            <div class="new-update clearfix"><i class="icon-ok-sign"></i>
+              <div class="update-done"><a title="" href="#"><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></a> <span>dolor sit amet, consectetur adipiscing eli</span> </div>
+              <div class="update-date"><span class="update-day">20</span>jan</div>
+            </div>
+            <div class="new-update clearfix"> <i class="icon-gift"></i> <span class="update-notice"> <a title="" href="#"><strong>Congratulation Maruti, Happy Birthday </strong></a> <span>many many happy returns of the day</span> </span> <span class="update-date"><span class="update-day">11</span>jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-move"></i> <span class="update-alert"> <a title="" href="#"><strong>Maruti is a Responsive Admin theme</strong></a> <span>But already everything was solved. It will ...</span> </span> <span class="update-date"><span class="update-day">07</span>Jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-leaf"></i> <span class="update-done"> <a title="" href="#"><strong>Envato approved Maruti Admin template</strong></a> <span>i am very happy to approved by TF</span> </span> <span class="update-date"><span class="update-day">05</span>jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-question-sign"></i> <span class="update-notice"> <a title="" href="#"><strong>I am alwayse here if you have any question</strong></a> <span>we glad that you choose our template</span> </span> <span class="update-date"><span class="update-day">01</span>jan</span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="widget-box widget-chat">
+          <div class="widget-title"> <span class="icon"> <i class="icon-comment"></i> </span>
+            <h5>Chat Option</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <div class="chat-users panel-right2">
+              <div class="panel-title">
+                <h5>Online Users</h5>
+              </div>
+              <div class="panel-content nopadding">
+                <ul class="contact-list">
+                  <li id="user-Sunil" class="online"><a href=""><img alt="" src="img/demo/av1.jpg" /> <span>Sunil</span></a></li>
+                  <li id="user-Laukik"><a href=""><img alt="" src="img/demo/av2.jpg" /> <span>Laukik</span></a></li>
+                  <li id="user-vijay" class="online new"><a href=""><img alt="" src="img/demo/av3.jpg" /> <span>Vijay</span></a><span class="msg-count badge badge-info">3</span></li>
+                  <li id="user-Jignesh" class="online"><a href=""><img alt="" src="img/demo/av4.jpg" /> <span>Jignesh</span></a></li>
+                  <li id="user-Malay" class="online"><a href=""><img alt="" src="img/demo/av5.jpg" /> <span>Malay</span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="chat-content panel-left2">
+              <div class="chat-messages" id="chat-messages">
+                <div id="chat-messages-inner"></div>
+              </div>
+              <div class="chat-message well">
+                <button class="btn btn-success">Send</button>
+                <span class="input-box">
+                <input type="text" name="msg-box" id="msg-box" />
+                </span> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title">
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#tab1">Tab1</a></li>
+              <li><a data-toggle="tab" href="#tab2">Tab2</a></li>
+              <li><a data-toggle="tab" href="#tab3">Tab3</a></li>
+            </ul>
+          </div>
+          <div class="widget-content tab-content">
+            <div id="tab1" class="tab-pane active">
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+              <img src="img/demo/demo-image1.jpg" alt="demo-image"/></div>
+            <div id="tab2" class="tab-pane"> <img src="img/demo/demo-image2.jpg" alt="demo-image"/>
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+            </div>
+            <div id="tab3" class="tab-pane">
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. </p>
+              <img src="img/demo/demo-image3.jpg" alt="demo-image"/></div>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"><span class="icon"><i class="icon-user"></i></span>
+            <h5>Our Partner (Box with Fix height)</h5>
+          </div>
+          <div class="widget-content nopadding fix_hgt">
+            <ul class="recent-posts">
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av1.jpg"> </div>
+                <div class="article-post"> <span class="user-info">John Deo</span>
+                  <p>Web Desginer &amp; creative Front end developer</p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av2.jpg"> </div>
+                <div class="article-post"> <span class="user-info">John Deo</span>
+                  <p>Web Desginer &amp; creative Front end developer</p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av4.jpg"> </div>
+                <div class="article-post"> <span class="user-info">John Deo</span>
+                  <p>Web Desginer &amp; creative Front end developer</p>
+                </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="accordion" id="collapse-group">
+          <div class="accordion-group widget-box">
+            <div class="accordion-heading">
+              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
+                <h5>Accordion Example 1</h5>
+                </a> </div>
+            </div>
+            <div class="collapse in accordion-body" id="collapseGOne">
+              <div class="widget-content"> It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </div>
+            </div>
+          </div>
+          <div class="accordion-group widget-box">
+            <div class="accordion-heading">
+              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGTwo" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
+                <h5>Accordion Example 2</h5>
+                </a> </div>
+            </div>
+            <div class="collapse accordion-body" id="collapseGTwo">
+              <div class="widget-content">And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.</div>
+            </div>
+          </div>
+          <div class="accordion-group widget-box">
+            <div class="accordion-heading">
+              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGThree" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
+                <h5>Accordion Example 3</h5>
+                </a> </div>
+            </div>
+            <div class="collapse accordion-body" id="collapseGThree">
+              <div class="widget-content"> Waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box collapsible">
+          <div class="widget-title"> <a data-toggle="collapse" href="#collapseOne"> <span class="icon"><i class="icon-arrow-right"></i></span>
+            <h5>Toggle, Open by default, </h5>
+            </a> </div>
+          <div id="collapseOne" class="collapse in">
+            <div class="widget-content"> This box is opened by default, paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </div>
+          </div>
+          <div class="widget-title"> <a data-toggle="collapse" href="#collapseTwo"> <span class="icon"><i class="icon-remove"></i></span>
+            <h5>Toggle, closed by default</h5>
+            </a> </div>
+          <div id="collapseTwo" class="collapse">
+            <div class="widget-content"> This box is now open </div>
+          </div>
+          <div class="widget-title"> <a data-toggle="collapse" href="#collapseThree"> <span class="icon"><i class="icon-remove"></i></span>
+            <h5>Toggle, closed by default</h5>
+            </a> </div>
+          <div id="collapseThree" class="collapse">
+            <div class="widget-content"> This box is now open </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+</div>
+</div>
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2012 &copy; Marutii Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div>
+  @endsection
