@@ -21,8 +21,8 @@ class AssociationGroup extends Authenticatable
             'pays',
             'ville',
             'page',
-            'active',
             'email',
-            'password'
+            'password',
+            'user_id'
     ];
 }

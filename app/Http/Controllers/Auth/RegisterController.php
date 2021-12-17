@@ -84,8 +84,14 @@ class RegisterController extends Controller
         $image_name = time() . '.' . $data['logo']->extension();
         // $data['logo'] = $image_name;
         $data['logo']->move(public_path('images/logo'), $image_name);
-        
+        $user=User::create([
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'active'=> 0,
+        ]);
+        // dd($user->id);
         return AssociationGroup::create([
+            'user_id' => $user->id,
             'logo' => $image_name,
             'nom_asso' => $data['nom_asso'],
             'type'=> $data['type'],
@@ -98,9 +104,6 @@ class RegisterController extends Controller
             'pays' => $data['pays'],
             'ville' => $data['ville'],
             'page' => $data['page'],
-            'active'=> 0,
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
         ]);
     }
     

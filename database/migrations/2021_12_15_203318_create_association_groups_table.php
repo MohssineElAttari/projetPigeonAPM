@@ -15,6 +15,7 @@ class CreateAssociationGroupsTable extends Migration
     {
         Schema::create('association_groups', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string("logo");
             $table->string("nom_asso");
             $table->string("type");
@@ -27,9 +28,6 @@ class CreateAssociationGroupsTable extends Migration
             $table->string("pays");
             $table->string("ville");
             $table->string("page");
-            $table->boolean("active");
-            $table->string("email")->unique();
-            $table->string("password");
             $table->timestamps();
         });
     }

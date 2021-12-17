@@ -16,7 +16,7 @@ class CreateAssoMembersTable extends Migration
         Schema::create('asso_members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('association_groups_id')->constrained();
-            $table->foreignId('membre')->constrained();
+            $table->foreignId('membre_id')->constrained();
             $table->date("date_inscription");
             $table->timestamps();
         });

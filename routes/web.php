@@ -14,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
+Route::middleware(['CheckActive','auth'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
+});
+
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard/index');
-});
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
