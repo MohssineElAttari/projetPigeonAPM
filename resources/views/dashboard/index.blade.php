@@ -1,24 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Majestic Admin</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="{{asset('vendors/dashboard/mdi/css/materialdesignicons.min.css')}}">
-  <link rel="stylesheet" href="{{asset('vendors/dashboard/base/vendor.bundle.base.css')}}">
+@section('content')
+
+@push('head')
+<link rel="stylesheet" href="{{asset('vendors/dashboard/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{asset('vendors/dashboard/base/vendor.bundle.base.css')}}">
+<!-- endinject -->
+<!-- plugin css for this page -->
+<link rel="stylesheet" href="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+<link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}">
+<!-- endinject -->
+<link rel="shortcut icon" href="{{asset('images/dashboard/favicon.png')}}" />
+
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="{{asset('vendors/dashboard/base/vendor.bundle.base.js')}}"></script>
   <!-- endinject -->
-  <!-- plugin css for this page -->
-  <link rel="stylesheet" href="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.css')}}">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}">
+  <!-- Plugin js for this page-->
+  <script src="{{asset('vendors/dashboard/chart.js/Chart.min.js')}}"></script>
+  <script src="{{asset('vendors/dashboard/datatables.net/jquery.dataTables.js')}}"></script>
+  <script src="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{{asset('js/dashboard/off-canvas.js')}}"></script>
+  <script src="{{asset('js/dashboard/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('js/dashboard/template.js')}}"></script>
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('images/dashboard/favicon.png')}}" />
-</head>
-<body>
+  <!-- Custom js for this page-->
+  <script src="{{asset('js/dashboard/dashboard.js')}}"></script>
+  <script src="{{asset('js/dashboard/data-table.js')}}"></script>
+  <script src="{{asset('js/dashboard/jquery.dataTables.js')}}"></script>
+  <script src="{{asset('js/dashboard/dataTables.bootstrap4.js')}}"></script>
+  <!-- End custom js for this page-->
+  @endpush
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -185,7 +202,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="{{route('membre')}}">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">Form elements</span>
             </a>
@@ -557,28 +574,3 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
-  <!-- plugins:js -->
-  <script src="{{asset('vendors/dashboard/base/vendor.bundle.base.js')}}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="{{asset('vendors/dashboard/chart.js/Chart.min.js')}}"></script>
-  <script src="{{asset('vendors/dashboard/datatables.net/jquery.dataTables.js')}}"></script>
-  <script src="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="{{asset('js/dashboard/off-canvas.js')}}"></script>
-  <script src="{{asset('js/dashboard/hoverable-collapse.js')}}"></script>
-  <script src="{{asset('js/dashboard/template.js')}}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{asset('js/dashboard/dashboard.js')}}"></script>
-  <script src="{{asset('js/dashboard/data-table.js')}}"></script>
-  <script src="{{asset('js/dashboard/jquery.dataTables.js')}}"></script>
-  <script src="{{asset('js/dashboard/dataTables.bootstrap4.js')}}"></script>
-  <!-- End custom js for this page-->
-</body>
-
-</html>
-

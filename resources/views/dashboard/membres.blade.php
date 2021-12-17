@@ -3,7 +3,7 @@
 @section('content')
 
 @push('head')
-<!-- plugins:css -->
+{{-- <!-- plugins:css -->
 <link rel="stylesheet" href="{{asset('vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{asset('vendors/base/vendor.bundle.base.css')}}">
 <!-- endinject -->
@@ -18,20 +18,48 @@
 
     <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="{{ asset('vendors/base/vendor.bundle.base.js') }}"></script>
+<script defer src="{{asset('vendors/base/vendor.bundle.base.js')}}"></script>
 <!-- endinject -->
 <!-- inject:js -->
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
+<script defer src="{{asset('js/off-canvas.js')}}"></script>
+<script defer src="{{asset('js/hoverable-collapse.js')}}"></script>
+<script defer src="{{asset('js/template.js')}}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
-<script src="../../js/file-upload.js"></script>
-<!-- End custom js for this page-->
-@endpush
-  
-    
-    
+<script defer src="{{asset('js/file-upload.js')}}"></script>
+<!-- End custom js for this page--> --}}
+<link rel="stylesheet" href="{{asset('vendors/dashboard/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{asset('vendors/dashboard/base/vendor.bundle.base.css')}}">
+<!-- endinject -->
+<!-- plugin css for this page -->
+<link rel="stylesheet" href="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+<link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}">
+<!-- endinject -->
+<link rel="shortcut icon" href="{{asset('images/dashboard/favicon.png')}}" />
+
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="{{asset('vendors/dashboard/base/vendor.bundle.base.js')}}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{{asset('vendors/dashboard/chart.js/Chart.min.js')}}"></script>
+  <script src="{{asset('vendors/dashboard/datatables.net/jquery.dataTables.js')}}"></script>
+  <script src="{{asset('vendors/dashboard/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{{asset('js/dashboard/off-canvas.js')}}"></script>
+  <script src="{{asset('js/dashboard/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('js/dashboard/template.js')}}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('js/dashboard/dashboard.js')}}"></script>
+  <script src="{{asset('js/dashboard/data-table.js')}}"></script>
+  <script src="{{asset('js/dashboard/jquery.dataTables.js')}}"></script>
+  <script src="{{asset('js/dashboard/dataTables.bootstrap4.js')}}"></script>
+@endpush    
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
@@ -199,7 +227,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../pages/forms/basic_elements.html">
+            <a class="nav-link" href="{{ route('membre') }}">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">Form elements</span>
             </a>
@@ -859,7 +887,4 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-
-
-
   @endsection

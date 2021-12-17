@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ConcourController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MembreController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware(['CheckActive','auth'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
+    Route::get('/home', [HomeController::class, 'index'])->name('home'); 
+    Route::get('/dashboard/membre',[MembreController::class,'index'])->name('membre');
+    Route::get('/dashboard/concour',[ConcourController::class,'index'])->name('concour');
 });
 
 Route::get('/', function () {
