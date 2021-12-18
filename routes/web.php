@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\ConcourController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MembreController;
@@ -22,6 +23,7 @@ Route::middleware(['CheckActive','auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home'); 
     Route::get('/dashboard/membre',[MembreController::class,'index'])->name('membre');
     Route::get('/dashboard/concour',[ConcourController::class,'index'])->name('concour');
+    Route::get('/logout', [LogoutController::class,'logout'])->name('logout.perform');
 });
 
 Route::get('/', function () {
