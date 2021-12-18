@@ -738,6 +738,7 @@ h4 {
 }
 .invalid-feedback{
     color: red;
-    margin-bottom: 24px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     display: block;
 }

@@ -23,9 +23,10 @@ class CheckActive
         $check=User::find($user)->active==0;
         if ($check) {
             Auth::logout();
-            $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return redirect()->route('login');
+            $request->session()->invalidate();
+            // session()->flash('error','your Message');
+            return redirect()->route('login')->with('notActive', 'Votre compte n\'a pas encore été activé. Merci de votre compréhension');;
         }
         return $next($request);
     }

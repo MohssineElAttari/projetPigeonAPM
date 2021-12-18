@@ -11,7 +11,7 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" href="{{asset('css/wizard/style.css')}}">
         <!-- Scripts -->
-
+        {{-- <link href="{{ asset('css/dashboard/bootstrap.min.css') }}" rel="stylesheet"> --}}
     @endpush
 
     <div class="wrapper">
@@ -86,6 +86,11 @@
                     <div class="justify-center">
                         <button type="submit" class="button"> {{ __('Login') }}</button>
                     </div>
+                    @if(session()->has('notActive'))
+                    <span class="invalid-feedback">
+                        <strong>{{ session()->get('notActive') }}</strong>
+                    </span>
+                    @endif
                 </div>
             </div>
         </form>
