@@ -1245,22 +1245,22 @@
                                         <tr>
                                             <th>Prenom</th>
                                             <th>Nom</th>
-                                            <th>longitude </th>
-                                            <th>latitude</th>
+                                            <th>Longitude </th>
+                                            <th>Latitude</th>
                                             <th>Eamil</th>
                                             <th>Télephon</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($membres as $membre)
                                         <tr>
-                                            <td>Mohammed</td>
-                                            <td>Amine</td>
-                                            <td>4° 50′ 32″ est</td>
-                                            <td>45° 45′ 35″ nord</td>
-                                            <td>Mohamed@gmail.com</td>
-
-                                            <td>0606060606</td>
+                                            <td>{{$membre->prenom_francais}}</td>
+                                            <td>{{$membre->nom_francais}}</td>
+                                            <td>{{$membre->longitude}}</td>
+                                            <td>{{$membre->latitude}}</td>
+                                            <td>{{$membre->email}}</td>
+                                            <td>{{$membre->tel}}</td>
                                             
                                             <td>
                                                 <div class="dropdown">
@@ -1281,6 +1281,8 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        @endforeach
+                                        
                                     </tbody>
                                 </table>
                             </div>
