@@ -60,6 +60,8 @@ class MembreController extends Controller
         $membre->email= $request->all()['email'];
         $membre->tel= $request->all()['tel'];
         $membre->save();
+        // dd($membre->id);
+        
         return view('dashboard/pages/membres');
     }
 
