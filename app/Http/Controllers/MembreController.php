@@ -50,16 +50,6 @@ class MembreController extends Controller
      */
     public function store(Request $request)
     {
-        // "prenom_francais" => "David"
-        // "prenom_araben" => "Burch"
-        // "nom_francais" => "Sed et sit dolorem"
-        // "nom_arabe" => "Quam dolore voluptas"
-        // "longitude" => "Massey and Gibson LLC"
-        // "latitude" => "Francis and Rivers Traders"
-        // "email" => "gikeh@mailinator.com"
-        // "tel" => "+1 (208) 568-1091"
-        // $req=$request->all();
-        // dd($req);
         $membre = new Membre();
         $membre->prenom_francais= $request->all()['prenom_francais'];
         $membre->prenom_arabe= $request->all()['prenom_arabe'];
@@ -70,6 +60,7 @@ class MembreController extends Controller
         $membre->email= $request->all()['email'];
         $membre->tel= $request->all()['tel'];
         $membre->save();
+        return view('dashboard/pages/membres');
     }
 
     /**
