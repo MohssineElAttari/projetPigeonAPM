@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asso_member;
 use App\Models\Membre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class MembreController extends Controller
@@ -27,9 +29,9 @@ class MembreController extends Controller
             ->select('membres.*')
             ->where('asso_members.association_groups_id', $id)
             ->get();
-            // dd($membres);
+        // dd($membres);
 
-        return view('dashboard/pages/membres',['membres' => $membres]);
+        return view('dashboard/pages/membres', ['membres' => $membres]);
     }
 
     /**
@@ -51,18 +53,23 @@ class MembreController extends Controller
     public function store(Request $request)
     {
         $membre = new Membre();
-        $membre->prenom_francais= $request->all()['prenom_francais'];
-        $membre->prenom_arabe= $request->all()['prenom_arabe'];
-        $membre->nom_francais= $request->all()['nom_francais'];
-        $membre->nom_arabe= $request->all()['nom_arabe'];
-        $membre->longitude= $request->all()['longitude'];
-        $membre->latitude= $request->all()['latitude'];
-        $membre->email= $request->all()['email'];
-        $membre->tel= $request->all()['tel'];
+        $membre->prenom_francais = $request->all()['prenom_francais'];
+        $membre->prenom_arabe = $request->all()['prenom_arabe'];
+        $membre->nom_francais = $request->all()['nom_francais'];
+        $membre->nom_arabe = $request->all()['nom_arabe'];
+        $membre->longitude = $request->all()['longitude'];
+        $membre->latitude = $request->all()['latitude'];
+        $membre->email = $request->all()['email'];
+        $membre->tel = $request->all()['tel'];
         $membre->save();
-        // dd($membre->id);
-        
-        return view('dashboard/pages/membres');
+
+        Asso_member::create([
+            'association_groups_id' => 1,
+            'membre_id' => $membre->id,
+            'date_inscription' => date('Y-m-d H:i'),
+        ]);
+
+        return $this->index();
     }
 
     /**
