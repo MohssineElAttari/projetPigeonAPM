@@ -22,6 +22,7 @@ Auth::routes();
 Route::middleware(['CheckActive','auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home'); 
     Route::get('/dashboard/membre',[MembreController::class,'index'])->name('membre');
+    Route::post('/dashboard/membre',[MembreController::class,'store'])->name('membre.store');
     Route::get('/dashboard/concour',[ConcourController::class,'index'])->name('concour');
     Route::get('/logout', [LogoutController::class,'logout'])->name('logout.perform');
 });

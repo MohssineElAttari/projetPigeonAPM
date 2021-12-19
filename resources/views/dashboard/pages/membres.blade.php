@@ -1156,9 +1156,9 @@
                                             <button type="button" class="btn btn-primary btn-outline-primary" data-toggle="modal" data-target="#inlineForm">
                                                 Login Form
                                             </button>
-                                            <form class="btn btn-outline-primary" action="" method="post">
+                                            {{-- <form class="btn btn-outline-primary" action="" method="post"> --}}
                                                 <input type="file" name="excel" value="Export">
-                                            </form>
+                                            {{-- </form> --}}
                                             <!-- Modal -->
                                             <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1170,62 +1170,61 @@
                                                             </button>
                                                         </div>
                                                         <div class="card">
-                                                            {{-- <div class="card-header">
-                                                                <h4 class="card-title">Multiple Column</h4>
-                                                            </div> --}}
+
                                                             <div class="card-body">
-                                                                <form class="form">
+                                                                <form class="form" method="POST" action="{{route('membre.store')}}">
+                                                                    @csrf
                                                                     <div class="row">
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="first-name-column">Prénom</label>
-                                                                                <input type="text" id="first-name-column" class="form-control" placeholder="Entrer le péenom de membre" name="fname-column" />
+                                                                                <input type="text" id="first-name-column" class="form-control" placeholder="Entrer le péenom de membre" name="prenom_francais" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="last-name-column">الإسم الشخصي</label>
-                                                                                <input type="text" id="last-name-column" class="form-control" placeholder="أدخل الإسم الشحصي للعضو" name="lname-column" />
+                                                                                <input type="text" id="last-name-column" class="form-control" placeholder="أدخل الإسم الشحصي للعضو" name="prenom_arabe" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="city-column">Nom</label>
-                                                                                <input type="text" id="city-column" class="form-control" placeholder="Entrer le nom de membre" name="city-column" />
+                                                                                <input type="text" id="city-column" class="form-control" placeholder="Entrer le nom de membre" name="nom_francais" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="country-floating">الإسم العائلي</label>
-                                                                                <input type="text" id="country-floating" class="form-control" name="country-floating" placeholder="أدخل الإسم العائلي للعضو" />
+                                                                                <input type="text" id="country-floating" class="form-control" name="nom_arabe" placeholder="أدخل الإسم العائلي للعضو" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Longitude </label>
-                                                                                <input type="text" id="company-column" class="form-control" name="company-column" placeholder="Longitude" />
+                                                                                <input type="text" id="company-column" class="form-control" name="longitude" placeholder="Longitude" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Latitude </label>
-                                                                                <input type="text" id="company-column" class="form-control" name="company-column" placeholder="Latitude" />
+                                                                                <input type="text" id="company-column" class="form-control" name="latitude" placeholder="Latitude" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="email-id-column">Email</label>
-                                                                                <input type="email" id="email-id-column" class="form-control" name="email-id-column" placeholder="Email" />
+                                                                                <input type="email" id="email-id-column" class="form-control" name="email" placeholder="Email" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="email-id-column">Télephon</label>
-                                                                                <input type="email" id="email-id-column" class="form-control" name="email-id-column" placeholder="Télephone" />
+                                                                                <input type="tel" id="email-id-column" class="form-control" name="tel" placeholder="Télephone" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
-                                                                            <button type="reset" class="btn btn-primary mr-1">Submit</button>
+                                                                            <button type="submit" class="btn btn-primary mr-1">Submit</button>
                                                                             <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                                         </div>
                                                                     </div>
@@ -1282,7 +1281,6 @@
                                             </td>
                                         </tr>
                                         @endforeach
-                                        
                                     </tbody>
                                 </table>
                             </div>
