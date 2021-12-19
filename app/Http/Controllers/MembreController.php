@@ -114,6 +114,9 @@ class MembreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $membre=Membre::find($id);
+        $membre->delete();
+        // return redirect('back');
+        return back()->withInput();
     }
 }
