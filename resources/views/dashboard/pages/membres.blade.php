@@ -1255,9 +1255,9 @@
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <button type="submit"
-                                                                                class="btn btn-primary mr-1">Submit</button>
+                                                                                class="btn btn-primary mr-1">Valider</button>
                                                                             <button type="reset"
-                                                                                class="btn btn-outline-secondary">Reset</button>
+                                                                                class="btn btn-outline-secondary">Annuler</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
