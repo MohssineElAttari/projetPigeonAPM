@@ -103,7 +103,7 @@ class MembreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd("test");
+        dd($request->all(), $id);
     }
 
     /**
