@@ -1155,7 +1155,7 @@
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary btn-outline-primary"
                                                 data-toggle="modal" data-target="#inlineForm">
-                                                Login Form
+                                                Ajouter
                                             </button>
                                             {{-- <form class="btn btn-outline-primary" action="" method="post"> --}}
                                             <input type="file" name="excel" value="Export">
