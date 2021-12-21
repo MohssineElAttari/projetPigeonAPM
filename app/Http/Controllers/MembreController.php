@@ -103,7 +103,17 @@ class MembreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all(), $id);
+        $membre = Membre::find($id);
+        $membre->prenom_francais = $request->all()['prenom_francais'];
+        $membre->prenom_arabe = $request->all()['prenom_arabe'];
+        $membre->nom_francais = $request->all()['nom_francais'];
+        $membre->nom_arabe = $request->all()['nom_arabe'];
+        $membre->longitude = $request->all()['longitude'];
+        $membre->latitude = $request->all()['latitude'];
+        $membre->email = $request->all()['email'];
+        $membre->tel = $request->all()['tel'];
+        $membre->save();
+        return back()->withInput();
     }
 
     /**
