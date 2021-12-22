@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MembreExport;
 use App\Models\Asso_member;
 use App\Models\Membre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use App\Exports\UsersExport;
+use App\Imports\MembreImport;
 
 class MembreController extends Controller
 {
@@ -113,7 +118,7 @@ class MembreController extends Controller
         $membre->email = $request->all()['email'];
         $membre->tel = $request->all()['tel'];
         $membre->save();
-        return back()->withInput();
+        return back()->with('success', 'update success');
     }
 
     /**
@@ -129,4 +134,28 @@ class MembreController extends Controller
         // return redirect('back');
         return back()->withInput();
     }
+
+    public function fileImportExport()
+    {
+       return view('dashboard/pages/membres');
+    }
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function fileImport(Request $request) 
+    {
+        // dd($request->file('file')->store('temp'));
+        Excel::import(new MembreImport, $request->file('file')->store('temp'));
+        return back();
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function fileExport() 
+    {
+        dd();
+        return Excel::download(new MembreExport, 'membres-collection.xlsx');
+    } 
 }
