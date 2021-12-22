@@ -1139,6 +1139,33 @@
                                 <div class="head-label">
                                     <h3 class="mb-0">Gerer les membre</h3>
                                 </div>
+
+                                <form class="row dt-buttons d-inline-flex" action="{{ route('file-import') }}"
+                                method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col">
+                                    <div class="row" style="max-width: 600px; margin: 0 auto;">
+                                        <div class="col">
+                                            <div class="custom-file text-left">
+                                                <input type="file" name="file" class="custom-file-input"
+                                                    id="customFile">
+                                                <label class="custom-file-label" for="customFile">Choose
+                                                    file</label>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary">Import data</button>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <form class="" action="{{ route('file-import') }}"
+                                        method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <button class="btn btn-primary">Export</button>
+
+                                    </form>
+                                    {{-- <input type="file" name="file" value="Export"> --}}
+                                </div>
+                            </form>
                                 <div class="dt-action-buttons text-right">
                                     <div class="dt-buttons d-inline-flex">
                                         <div class="form-modal-ex">
@@ -1147,22 +1174,7 @@
                                                 data-toggle="modal" data-target="#test">
                                                 Ajouter
                                             </button>
-                                            <form class="btn btn-outline-primary" action="{{ route('file-import',) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
 
-
-
-                                                <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
-                                                    <div class="custom-file text-left">
-                                                        <input type="file" name="file" class="custom-file-input" id="customFile">
-                                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-primary">Import data</button>
-
-
-                                                {{-- <input type="file" name="file" value="Export"> --}}
-                                            </form>
                                             <!-- Modal -->
                                             <div class="modal fade text-left" id="test" tabindex="-1" role="dialog"
                                                 aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -1187,8 +1199,8 @@
                                                                             <div class="form-group">
                                                                                 <label
                                                                                     for="first-name-column">Prénom</label>
-                                                                                <input type="text" id="first-name-column" required
-                                                                                    class="form-control"
+                                                                                <input type="text" id="first-name-column"
+                                                                                    required class="form-control"
                                                                                     placeholder="Entrer le péenom de membre"
                                                                                     name="prenom_francais" />
                                                                             </div>
@@ -1197,8 +1209,8 @@
                                                                             <div class="form-group">
                                                                                 <label for="last-name-column">الإسم
                                                                                     الشخصي</label>
-                                                                                <input type="text" id="last-name-column" required
-                                                                                    class="form-control"
+                                                                                <input type="text" id="last-name-column"
+                                                                                    required class="form-control"
                                                                                     placeholder="أدخل الإسم الشحصي للعضو"
                                                                                     name="prenom_arabe" />
                                                                             </div>
@@ -1216,8 +1228,9 @@
                                                                             <div class="form-group">
                                                                                 <label for="country-floating">الإسم
                                                                                     العائلي</label>
-                                                                                <input type="text" id="country-floating" required
-                                                                                    class="form-control" name="nom_arabe"
+                                                                                <input type="text" id="country-floating"
+                                                                                    required class="form-control"
+                                                                                    name="nom_arabe"
                                                                                     placeholder="أدخل الإسم العائلي للعضو" />
                                                                             </div>
                                                                         </div>
@@ -1225,8 +1238,9 @@
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Longitude
                                                                                 </label>
-                                                                                <input type="text" id="company-column" required
-                                                                                    class="form-control" name="longitude"
+                                                                                <input type="text" id="company-column"
+                                                                                    required class="form-control"
+                                                                                    name="longitude"
                                                                                     placeholder="Longitude" />
                                                                             </div>
                                                                         </div>
@@ -1234,33 +1248,34 @@
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Latitude
                                                                                 </label>
-                                                                                <input type="text" id="company-column" required
-                                                                                    class="form-control" name="latitude"
+                                                                                <input type="text" id="company-column"
+                                                                                    required class="form-control"
+                                                                                    name="latitude"
                                                                                     placeholder="Latitude" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="email-id-column">Email</label>
-                                                                                <input type="email" id="email-id-column" required
-                                                                                    class="form-control" name="email"
-                                                                                    placeholder="Email" />
+                                                                                <input type="email" id="email-id-column"
+                                                                                    required class="form-control"
+                                                                                    name="email" placeholder="Email" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label
                                                                                     for="email-id-column">Télephon</label>
-                                                                                <input type="tel" id="email-id-column" required
-                                                                                    class="form-control" name="tel"
-                                                                                    placeholder="Télephone" />
+                                                                                <input type="tel" id="email-id-column"
+                                                                                    required class="form-control"
+                                                                                    name="tel" placeholder="Télephone" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <button type="submit"
                                                                                 class="btn btn-primary mr-1">Valider</button>
                                                                             <button type="rest" class="close"
-                                                                            data-dismiss="modal"
+                                                                                data-dismiss="modal"
                                                                                 class="btn btn-outline-secondary">Annuler</button>
                                                                         </div>
                                                                     </div>
@@ -1322,7 +1337,8 @@
                                                             action="{{ route('membre.delete', ['id' => $membre->id]) }}"
                                                             method="POST">
                                                             @csrf
-                                                            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-gradient-danger ml-1"
+                                                            <button type="submit" onclick="return confirm('Are you sure?')"
+                                                                class="btn btn-gradient-danger ml-1"
                                                                 href="javascript:void(0);"
                                                                 value="{{ $membre->id }} name=" delete">
                                                                 <i data-feather="trash" class="mr-50"></i>
@@ -1364,8 +1380,8 @@
                                                                                         for="first-name-column">Prénom</label>
                                                                                     <input type="text"
                                                                                         id="first-name-column"
-                                                                                        value="{{ $membre->prenom_francais }}" required
-                                                                                        class="form-control"
+                                                                                        value="{{ $membre->prenom_francais }}"
+                                                                                        required class="form-control"
                                                                                         placeholder="Entrer le péenom de membre"
                                                                                         name="prenom_francais" />
                                                                                 </div>
@@ -1374,7 +1390,8 @@
                                                                                 <div class="form-group">
                                                                                     <label for="last-name-column">الإسم
                                                                                         الشخصي</label>
-                                                                                    <input type="text" id="last-name-column" required
+                                                                                    <input type="text" id="last-name-column"
+                                                                                        required
                                                                                         value="{{ $membre->prenom_arabe }}"
                                                                                         class="form-control"
                                                                                         placeholder="أدخل الإسم الشحصي للعضو"
@@ -1384,7 +1401,8 @@
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
                                                                                     <label for="city-column">Nom</label>
-                                                                                    <input type="text" id="city-column" required
+                                                                                    <input type="text" id="city-column"
+                                                                                        required
                                                                                         value="{{ $membre->nom_francais }}"
                                                                                         class="form-control"
                                                                                         placeholder="Entrer le nom de membre"
@@ -1395,7 +1413,8 @@
                                                                                 <div class="form-group">
                                                                                     <label for="country-floating">الإسم
                                                                                         العائلي</label>
-                                                                                    <input type="text" id="country-floating" required
+                                                                                    <input type="text" id="country-floating"
+                                                                                        required
                                                                                         value="{{ $membre->nom_arabe }}"
                                                                                         class="form-control"
                                                                                         name="nom_arabe"
@@ -1406,7 +1425,8 @@
                                                                                 <div class="form-group">
                                                                                     <label for="company-column">Longitude
                                                                                     </label>
-                                                                                    <input type="text" id="company-column" required
+                                                                                    <input type="text" id="company-column"
+                                                                                        required
                                                                                         value="{{ $membre->longitude }}"
                                                                                         class="form-control"
                                                                                         name="longitude"
@@ -1417,7 +1437,8 @@
                                                                                 <div class="form-group">
                                                                                     <label for="company-column">Latitude
                                                                                     </label>
-                                                                                    <input type="text" id="company-column" required
+                                                                                    <input type="text" id="company-column"
+                                                                                        required
                                                                                         value="{{ $membre->latitude }}"
                                                                                         class="form-control"
                                                                                         name="latitude"
@@ -1429,7 +1450,8 @@
                                                                                     <label
                                                                                         for="email-id-column">Email</label>
 
-                                                                                    <input type="email" id="email-id-column" required
+                                                                                    <input type="email" id="email-id-column"
+                                                                                        required
                                                                                         value="{{ $membre->email }}"
                                                                                         class="form-control" name="email"
                                                                                         placeholder="Email" />
@@ -1439,7 +1461,8 @@
                                                                                 <div class="form-group">
                                                                                     <label
                                                                                         for="email-id-column">Télephon</label>
-                                                                                    <input type="tel" id="email-id-column" required
+                                                                                    <input type="tel" id="email-id-column"
+                                                                                        required
                                                                                         value="{{ $membre->tel }}"
                                                                                         class="form-control" name="tel"
                                                                                         placeholder="Télephone" />
@@ -1447,7 +1470,8 @@
                                                                             </div>
                                                                             <div class="col-12">
 
-                                                                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                                                                <button type="submit"
+                                                                                    onclick="return confirm('Are you sure?')"
                                                                                     class="btn btn-primary mr-1">Valider</button>
                                                                                 <button type="reset"
                                                                                     class="btn btn-outline-secondary">Annuler</button>
