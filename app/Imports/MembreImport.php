@@ -4,11 +4,12 @@ namespace App\Imports;
 
 use App\Models\Membre;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MembreImport implements ToCollection,WithHeadingRow
+class MembreImport implements ToCollection,WithHeadingRow,SkipsEmptyRows
 {
     /**
      * @param array $row
@@ -27,20 +28,6 @@ class MembreImport implements ToCollection,WithHeadingRow
     //         'latitude'    =>$row[5],
     //         'email'    =>$row[6],
     //         'tel'    =>$row[7],
-    //     ]);
-    // }
-
-    // public function model(array $row)
-    // {
-    //     return new Membre([
-    //         'prenom_francais'     => $row[0],
-    //         'prenom_arabe'     => $row[1],
-    //         'nom_francais'    => $row[2],
-    //         'nom_arabe'    => $row[3],
-    //         'longitude'    => $row[4],
-    //         'latitude'    => $row[5],
-    //         'email'    => $row[6],
-    //         'tel'    => $row[7],
     //     ]);
     // }
 
