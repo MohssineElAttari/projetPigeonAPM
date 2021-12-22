@@ -1147,9 +1147,22 @@
                                                 data-toggle="modal" data-target="#test">
                                                 Ajouter
                                             </button>
-                                            {{-- <form class="btn btn-outline-primary" action="" method="post"> --}}
-                                            <input type="file" name="excel" value="Export">
-                                            {{-- </form> --}}
+                                            <form class="btn btn-outline-primary" action="{{ route('file-import',) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+
+
+
+                                                <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+                                                    <div class="custom-file text-left">
+                                                        <input type="file" name="file" class="custom-file-input" id="customFile">
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-primary">Import data</button>
+
+
+                                                {{-- <input type="file" name="file" value="Export"> --}}
+                                            </form>
                                             <!-- Modal -->
                                             <div class="modal fade text-left" id="test" tabindex="-1" role="dialog"
                                                 aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -1174,7 +1187,7 @@
                                                                             <div class="form-group">
                                                                                 <label
                                                                                     for="first-name-column">Prénom</label>
-                                                                                <input type="text" id="first-name-column"
+                                                                                <input type="text" id="first-name-column" required
                                                                                     class="form-control"
                                                                                     placeholder="Entrer le péenom de membre"
                                                                                     name="prenom_francais" />
@@ -1184,7 +1197,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="last-name-column">الإسم
                                                                                     الشخصي</label>
-                                                                                <input type="text" id="last-name-column"
+                                                                                <input type="text" id="last-name-column" required
                                                                                     class="form-control"
                                                                                     placeholder="أدخل الإسم الشحصي للعضو"
                                                                                     name="prenom_arabe" />
@@ -1193,7 +1206,7 @@
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="city-column">Nom</label>
-                                                                                <input type="text" id="city-column"
+                                                                                <input type="text" id="city-column" required
                                                                                     class="form-control"
                                                                                     placeholder="Entrer le nom de membre"
                                                                                     name="nom_francais" />
@@ -1203,7 +1216,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="country-floating">الإسم
                                                                                     العائلي</label>
-                                                                                <input type="text" id="country-floating"
+                                                                                <input type="text" id="country-floating" required
                                                                                     class="form-control" name="nom_arabe"
                                                                                     placeholder="أدخل الإسم العائلي للعضو" />
                                                                             </div>
@@ -1212,7 +1225,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Longitude
                                                                                 </label>
-                                                                                <input type="text" id="company-column"
+                                                                                <input type="text" id="company-column" required
                                                                                     class="form-control" name="longitude"
                                                                                     placeholder="Longitude" />
                                                                             </div>
@@ -1221,7 +1234,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Latitude
                                                                                 </label>
-                                                                                <input type="text" id="company-column"
+                                                                                <input type="text" id="company-column" required
                                                                                     class="form-control" name="latitude"
                                                                                     placeholder="Latitude" />
                                                                             </div>
@@ -1229,7 +1242,7 @@
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label for="email-id-column">Email</label>
-                                                                                <input type="email" id="email-id-column"
+                                                                                <input type="email" id="email-id-column" required
                                                                                     class="form-control" name="email"
                                                                                     placeholder="Email" />
                                                                             </div>
@@ -1238,7 +1251,7 @@
                                                                             <div class="form-group">
                                                                                 <label
                                                                                     for="email-id-column">Télephon</label>
-                                                                                <input type="tel" id="email-id-column"
+                                                                                <input type="tel" id="email-id-column" required
                                                                                     class="form-control" name="tel"
                                                                                     placeholder="Télephone" />
                                                                             </div>
@@ -1246,7 +1259,8 @@
                                                                         <div class="col-12">
                                                                             <button type="submit"
                                                                                 class="btn btn-primary mr-1">Valider</button>
-                                                                            <button type="reset"
+                                                                            <button type="rest" class="close"
+                                                                            data-dismiss="modal"
                                                                                 class="btn btn-outline-secondary">Annuler</button>
                                                                         </div>
                                                                     </div>
@@ -1276,6 +1290,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if (\Session::has('success'))
+                                            <div class="alert alert-success">
+                                                <ul>
+                                                    <li>{!! \Session::get('success') !!}</li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                         @foreach ($membres as $membre)
 
                                             <tr>
@@ -1286,179 +1307,160 @@
                                                 <td>{{ $membre->email }}</td>
                                                 <td>{{ $membre->tel }}</td>
                                                 <td>
-                                                        <div class="dt-buttons d-inline-flex">
-                                                            <!-- Button trigger modal -->
+                                                    <div class="dt-buttons d-inline-flex">
+                                                        <!-- Button trigger modal -->
 
-                                                            
-                                                                <button type="button" class="btn btn-gradient-success mr-1"
-                                                                    data-toggle="modal"
-                                                                    data-target="#Form-{{ $membre->id }}" href="#">
-                                                                    <i data-feather="edit-2" class="mr-50"></i>
-                                                                    <span>Edit</span>
-                                                                </button>
 
-                                                                <form
-                                                                    action="{{ route('membre.delete', ['id' => $membre->id]) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button type="submit"
-                                                                        class="btn btn-gradient-danger ml-1"
-                                                                        href="javascript:void(0);"
-                                                                        value="{{ $membre->id }} name="delete">
-                                                                        <i data-feather="trash" class="mr-50"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </form>
-                                                        </div>
+                                                        <button type="button" class="btn btn-gradient-success mr-1"
+                                                            data-toggle="modal" data-target="#Form-{{ $membre->id }}"
+                                                            href="#">
+                                                            <i data-feather="edit-2" class="mr-50"></i>
+                                                            <span>Edit</span>
+                                                        </button>
+
+                                                        <form
+                                                            action="{{ route('membre.delete', ['id' => $membre->id]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-gradient-danger ml-1"
+                                                                href="javascript:void(0);"
+                                                                value="{{ $membre->id }} name=" delete">
+                                                                <i data-feather="trash" class="mr-50"></i>
+                                                                <span>Delete</span>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                                                                                        <!-- Modal -->
+                                            <!-- Modal -->
 
-                                                                                                        <div class="form-modal-ex">
-                                                                                                            <form class="form"
-                                                                                                            method="POST"
-                                                                                                            action="{{ route('membre.update', ['id' => $membre->id]) }}">
-                                                                                                            @csrf
-                                                                                                            <div class="modal modal fade text-left"
-                                                                                                                id="Form-{{ $membre->id }}" tabindex="-1"
-                                                                                                                role="dialog" aria-labelledby="myModalLabel33"
-                                                                                                                aria-hidden="true">
-                                                                                                                <div class="modal-dialog modal-dialog-centered modal-lg"
-                                                                                                                    role="document">
-                                                                                                                    <div class="modal-content">
-                                                                                                                        <div class="modal-header">
-                                                                                                                            <h4 class="modal-title"
-                                                                                                                                id="myModalLabel33">update
-                                                                                                                                les
-                                                                                                                                info de
-                                                                                                                                membre</h4>
-                                                                                                                            <button type="button"
-                                                                                                                                class="close"
-                                                                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                                                                <span aria-hidden="true">&times;</span>
-                                                                                                                            </button>
-                                                                                                                        </div>
-                                                                                                                        <div class="card">
-                                                                                                                            <div class="card-body">
-                                            
-                                                                                                                                <div class="row">
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="first-name-column">Prénom</label>
-                                                                                                                                            <input type="text"
-                                                                                                                                                id="first-name-column"
-                                                                                                                                                value="{{ $membre->prenom_francais }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                placeholder="Entrer le péenom de membre"
-                                                                                                                                                name="prenom_francais" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="last-name-column">الإسم
-                                                                                                                                                الشخصي</label>
-                                                                                                                                            <input type="text"
-                                                                                                                                                id="last-name-column"
-                                                                                                                                                value="{{ $membre->prenom_arabe }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                placeholder="أدخل الإسم الشحصي للعضو"
-                                                                                                                                                name="prenom_arabe" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="city-column">Nom</label>
-                                                                                                                                            <input type="text"
-                                                                                                                                                id="city-column"
-                                                                                                                                                value="{{ $membre->nom_francais }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                placeholder="Entrer le nom de membre"
-                                                                                                                                                name="nom_francais" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="country-floating">الإسم
-                                                                                                                                                العائلي</label>
-                                                                                                                                            <input type="text"
-                                                                                                                                                id="country-floating"
-                                                                                                                                                value="{{ $membre->nom_arabe }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                name="nom_arabe"
-                                                                                                                                                placeholder="أدخل الإسم العائلي للعضو" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="company-column">Longitude
-                                                                                                                                            </label>
-                                                                                                                                            <input type="text"
-                                                                                                                                                id="company-column"
-                                                                                                                                                value="{{ $membre->longitude }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                name="longitude"
-                                                                                                                                                placeholder="Longitude" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="company-column">Latitude
-                                                                                                                                            </label>
-                                                                                                                                            <input type="text"
-                                                                                                                                                id="company-column"
-                                                                                                                                                value="{{ $membre->latitude }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                name="latitude"
-                                                                                                                                                placeholder="Latitude" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="email-id-column">Email</label>
-                                            
-                                                                                                                                            <input type="email"
-                                                                                                                                                id="email-id-column"
-                                                                                                                                                value="{{ $membre->email }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                name="email"
-                                                                                                                                                placeholder="Email" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-md-6 col-12">
-                                                                                                                                        <div class="form-group">
-                                                                                                                                            <label
-                                                                                                                                                for="email-id-column">Télephon</label>
-                                                                                                                                            <input type="tel"
-                                                                                                                                                id="email-id-column"
-                                                                                                                                                value="{{ $membre->tel }}"
-                                                                                                                                                class="form-control"
-                                                                                                                                                name="tel"
-                                                                                                                                                placeholder="Télephone" />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="col-12">
-                                                                                                                                        
-                                                                                                                                            <button type="submit"
-                                                                                                                                                class="btn btn-primary mr-1">Valider</button>
-                                                                                                                                            <button type="reset"
-                                                                                                                                                class="btn btn-outline-secondary">Annuler</button>
-                                                                                                                                    </div>
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            </form>
-                                                                                                        </div>
-                                                                                                        <!-- End Modal -->
+                                            <div class="form-modal-ex">
+                                                <form class="form" method="POST"
+                                                    action="{{ route('membre.update', ['id' => $membre->id]) }}">
+                                                    @csrf
+                                                    <div class="modal modal fade text-left" id="Form-{{ $membre->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-lg"
+                                                            role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel33">update
+                                                                        les
+                                                                        info de
+                                                                        membre</h4>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="card">
+                                                                    <div class="card-body">
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="first-name-column">Prénom</label>
+                                                                                    <input type="text"
+                                                                                        id="first-name-column"
+                                                                                        value="{{ $membre->prenom_francais }}" required
+                                                                                        class="form-control"
+                                                                                        placeholder="Entrer le péenom de membre"
+                                                                                        name="prenom_francais" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="last-name-column">الإسم
+                                                                                        الشخصي</label>
+                                                                                    <input type="text" id="last-name-column" required
+                                                                                        value="{{ $membre->prenom_arabe }}"
+                                                                                        class="form-control"
+                                                                                        placeholder="أدخل الإسم الشحصي للعضو"
+                                                                                        name="prenom_arabe" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="city-column">Nom</label>
+                                                                                    <input type="text" id="city-column" required
+                                                                                        value="{{ $membre->nom_francais }}"
+                                                                                        class="form-control"
+                                                                                        placeholder="Entrer le nom de membre"
+                                                                                        name="nom_francais" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="country-floating">الإسم
+                                                                                        العائلي</label>
+                                                                                    <input type="text" id="country-floating" required
+                                                                                        value="{{ $membre->nom_arabe }}"
+                                                                                        class="form-control"
+                                                                                        name="nom_arabe"
+                                                                                        placeholder="أدخل الإسم العائلي للعضو" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="company-column">Longitude
+                                                                                    </label>
+                                                                                    <input type="text" id="company-column" required
+                                                                                        value="{{ $membre->longitude }}"
+                                                                                        class="form-control"
+                                                                                        name="longitude"
+                                                                                        placeholder="Longitude" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="company-column">Latitude
+                                                                                    </label>
+                                                                                    <input type="text" id="company-column" required
+                                                                                        value="{{ $membre->latitude }}"
+                                                                                        class="form-control"
+                                                                                        name="latitude"
+                                                                                        placeholder="Latitude" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="email-id-column">Email</label>
+
+                                                                                    <input type="email" id="email-id-column" required
+                                                                                        value="{{ $membre->email }}"
+                                                                                        class="form-control" name="email"
+                                                                                        placeholder="Email" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="email-id-column">Télephon</label>
+                                                                                    <input type="tel" id="email-id-column" required
+                                                                                        value="{{ $membre->tel }}"
+                                                                                        class="form-control" name="tel"
+                                                                                        placeholder="Télephone" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-12">
+
+                                                                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                                                                    class="btn btn-primary mr-1">Valider</button>
+                                                                                <button type="reset"
+                                                                                    class="btn btn-outline-secondary">Annuler</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- End Modal -->
                                         @endforeach
                                     </tbody>
                                 </table>
