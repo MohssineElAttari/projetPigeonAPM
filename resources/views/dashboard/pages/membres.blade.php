@@ -1139,41 +1139,32 @@
                                 <div class="head-label">
                                     <h3 class="mb-0">Gerer les membre</h3>
                                 </div>
-
-                                <form class="row dt-buttons d-inline-flex" action="{{ route('file-import') }}"
-                                method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="col">
-                                    <div class="row" style="max-width: 600px; margin: 0 auto;">
-                                        <div class="col">
-                                            <div class="custom-file text-left">
-                                                <input type="file" name="file" class="custom-file-input"
-                                                    id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose
-                                                    file</label>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary">Import data</button>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <form class="" action="{{ route('file-import') }}"
-                                        method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <button class="btn btn-primary">Export</button>
-
-                                    </form>
-                                    {{-- <input type="file" name="file" value="Export"> --}}
-                                </div>
-                            </form>
                                 <div class="dt-action-buttons text-right">
                                     <div class="dt-buttons d-inline-flex">
                                         <div class="form-modal-ex">
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-outline-primary"
-                                                data-toggle="modal" data-target="#test">
-                                                Ajouter
-                                            </button>
+                                            <div class="btn-outline-gradient-info">
+                                                <button type="button" class="btn btn-gradient-info" data-toggle="modal"
+                                                    data-target="#test">
+                                                    Ajouter
+                                                </button>
+                                            </div>
+
+                                            <form class="btn-outline-gradient-warning"
+                                                action="{{ route('membre-mmport') }}" method="GET"
+                                                >
+                                            {{-- @csrf --}}
+                                                <button type="submit" class="btn btn-gradient-warning">
+                                                    Importer
+                                                </button>
+                                            </form>
+                                            <form class="btn-outline-gradient-dark" action="{{ route('file-export') }}"
+                                                method="GET" enctype="multipart/form-data">
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-dark">
+                                                    Exporte
+                                                </button>
+                                            </form>
 
                                             <!-- Modal -->
                                             <div class="modal fade text-left" id="test" tabindex="-1" role="dialog"
@@ -1326,11 +1317,10 @@
                                                         <!-- Button trigger modal -->
 
 
-                                                        <button type="button" class="btn btn-gradient-success mr-1"
+                                                        <button type="button" class="btn btn-gradient-success"
                                                             data-toggle="modal" data-target="#Form-{{ $membre->id }}"
                                                             href="#">
                                                             <i data-feather="edit-2" class="mr-50"></i>
-                                                            <span>Edit</span>
                                                         </button>
 
                                                         <form
@@ -1342,7 +1332,6 @@
                                                                 href="javascript:void(0);"
                                                                 value="{{ $membre->id }} name=" delete">
                                                                 <i data-feather="trash" class="mr-50"></i>
-                                                                <span>Delete</span>
                                                             </button>
                                                         </form>
                                                     </div>

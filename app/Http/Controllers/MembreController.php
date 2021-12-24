@@ -155,7 +155,8 @@ class MembreController extends Controller
     */
     public function fileExport() 
     {
-        dd();
+        // dd();
         return Excel::download(new MembreExport, 'membres-collection.xlsx');
+        return back();
     } 
 }
