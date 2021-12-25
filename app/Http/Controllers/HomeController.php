@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssociationGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+
+        $associationGroup=DB::table('association_groups')->where('user_id', Auth::id())->first();
+        return view('dashboard', ['associationGroup' => $associationGroup]);
     }
 }

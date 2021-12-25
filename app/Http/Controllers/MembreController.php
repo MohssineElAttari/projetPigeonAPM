@@ -35,8 +35,8 @@ class MembreController extends Controller
             ->where('asso_members.association_groups_id', $id)
             ->get();
         // dd($membres);
-
-        return view('dashboard/pages/membres', ['membres' => $membres]);
+        $associationGroup=DB::table('association_groups')->where('user_id', Auth::id())->first();
+        return view('dashboard/pages/membres', ['associationGroup' => $associationGroup,'membres' => $membres]);
     }
 
     /**
