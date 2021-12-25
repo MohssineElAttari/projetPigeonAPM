@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ImportController extends Controller
 {
     function index()
     {
-        return view('dashboard/pages/import');
+        $associationGroup=DB::table('association_groups')->where('user_id', Auth::id())->first();
+       return view('dashboard/pages/import', ['associationGroup' => $associationGroup]);
     }
 
     function fetch_data(Request $request)
