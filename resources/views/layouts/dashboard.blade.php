@@ -45,7 +45,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/style.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/style.css') }}"> --}}
     <!-- END: Custom CSS-->
 
     <!-- Scripts -->
@@ -68,7 +68,7 @@
     <script defer src="{{ asset('js/dashboard/scripts/pages/dashboard-ecommerce.js') }}"></script>
     <!-- END: Page JS-->
 
-    <script defer>
+    {{-- <script defer>
         $(window).on('load', function() {
             if (feather) {
                 feather.replace({
@@ -77,7 +77,7 @@
                 });
             }
         })
-    </script>
+    </script> --}}
     {{-- end script --}}
     @stack('head')
 
