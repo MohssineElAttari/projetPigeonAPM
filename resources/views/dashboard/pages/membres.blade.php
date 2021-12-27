@@ -6,12 +6,14 @@
 <!-- END: Navbar-->
 @section('content')
     @push('head')
-        {{-- <script src="{{asset('vendors/dashboard/js/ui/jquery.sticky.js')}}"></script> --}}
-        <script defer src="{{ asset('vendors/dashboard/js/forms/validation/jquery.validate.min.js') }}"></script>
-        <script defer src="{{ asset('vendors/dashboard/js/forms/validation/jquery.validate.min.js') }}"></script>
+    {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/dashboard/forms/select/select2.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/plugins/forms/form-validation.css') }}">
+        {{-- <script src="{{asset('vendors/dashboard/js/ui/jquery.sticky.js')}}"></script> --}}
+        {{-- <script defer src="{{ asset('vendors/dashboard/js/forms/validation/jquery.validate.min.js') }}"></script> --}}
+        {{-- <script defer src="{{ asset('vendors/dashboard/js/forms/validation/jquery.validate.min.js') }}"></script> --}}
+
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/dashboard/forms/select/select2.min.css') }}"> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard/plugins/forms/form-validation.css') }}"> --}}
     @endpush
 
 
@@ -392,16 +394,6 @@
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <script>
-        $(window).on('load', function() {
-            if (feather) {
-                feather.replace({
-                    width: 14,
-                    height: 14
-                });
-            }
-        })
-    </script>
 @endsection
 
 <!-- BEGIN: Footer-->
