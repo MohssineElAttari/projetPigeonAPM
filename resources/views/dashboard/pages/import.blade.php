@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 <!-- BEGIN: Navbar-->
-{{-- @section('navbar')
+@section('navbar')
     @include('layouts.navbar')
-@endsection --}}
+@endsection
 <!-- END: Navbar-->
 @section('content')
 
