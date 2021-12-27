@@ -58,7 +58,7 @@ $(document).ready(function() {
         if (prenom_francais != '' && nom_francais != '' && longitude != '' &&
             longitude != '' && email != '' && tel != '') {
             $.ajax({
-                url: "{{ route('membre.add_data') }}",
+                url: addLinke,
                 method: "POST",
                 data: {
                     prenom_francais: prenom_francais,
@@ -86,7 +86,7 @@ $(document).ready(function() {
 
         if (column_value != '') {
             $.ajax({
-                url: "{{ route('membre.update_data') }}",
+                url: updateLinke,
                 method: "POST",
                 data: {
                     column_name: column_name,
@@ -107,7 +107,7 @@ $(document).ready(function() {
         var id = $(this).attr("id");
         if (confirm("Are you sure you want to delete this records?")) {
             $.ajax({
-                url: "{{ route('membre.delete_data') }}",
+                url: deleteLinke,
                 method: "POST",
                 data: {
                     id: id,
