@@ -7,10 +7,25 @@
 @section('content')
 
     @push('head')
+        <style>
+            input[type="file"] {
+                display: none;
+            }
+
+            .custom-file-upload {
+                border: 1px solid #ccc;
+                border-radius: 0.358rem;
+                display: inline-block;
+                padding: 9px 12px;
+                cursor: pointer;
+            }
+
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script>
-            var addLinke="{{ route('membre.add_data') }}";
-            var deleteLinke="{{ route('membre.delete_data') }}";
-            var updateLinke="{{ route('membre.update_data') }}";
+            var addLinke = "{{ route('membre.add_data') }}";
+            var deleteLinke = "{{ route('membre.delete_data') }}";
+            var updateLinke = "{{ route('membre.update_data') }}";
         </script>
         {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
         <script defer src="{{ asset('js/dashboard/import.js') }}"></script>
@@ -42,14 +57,35 @@
 
             </div>
             <div class="content-body">
+                <!-- Relief Buttons start -->
+                <section id="relief-buttons" class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Import les la liste des membre</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="demo-inline-spacing">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="fa fa-cloud-upload"></i> Selectionner votre fichier le fichier excel
+                                        </label>
+                                        <input id="file-upload" type="file" />
 
+                                        <button type="button" class="btn btn-relief-info">Importer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Relief Buttons end -->
                 <!-- Table head options start -->
                 <div class="row" id="table-head">
                     <!-- BEGIN: Content-->
                     <div class="container box">
-                        <h3 align="center">Import les la liste des membre</h3><br />
+                        <h3 align="center">la liste des membre</h3><br />
                         <div class="panel panel-default">
-                            <div class="panel-heading">Sample Data</div>
                             <div class="panel-body">
                                 <div id="message"></div>
                                 <div class="table-responsive">
@@ -93,7 +129,7 @@
 
 
 {{-- <script>
-    @if(Session::has('message'))
+    @if (Session::has('message'))
     toastr.options =
     {
         "closeButton" : true,
@@ -102,7 +138,7 @@
             toastr.success("{{ session('message') }}");
     @endif
   
-    @if(Session::has('error'))
+    @if (Session::has('error'))
     toastr.options =
     {
         "closeButton" : true,
@@ -111,7 +147,7 @@
             toastr.error("{{ session('error') }}");
     @endif
   
-    @if(Session::has('info'))
+    @if (Session::has('info'))
     toastr.options =
     {
         "closeButton" : true,
@@ -120,7 +156,7 @@
             toastr.info("{{ session('info') }}");
     @endif
   
-    @if(Session::has('warning'))
+    @if (Session::has('warning'))
     toastr.options =
     {
         "closeButton" : true,
