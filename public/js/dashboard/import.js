@@ -1,12 +1,12 @@
-$(document).ready(function() {
-    
+$(document).ready(function () {
+
     fetch_data();
 
     function fetch_data() {
         $.ajax({
             url: "import-membre/fetch_data",
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 var html = '';
                 html += '<tr>';
                 html += '<td contenteditable id="prenom_francais"></td>';
@@ -48,7 +48,7 @@ $(document).ready(function() {
 
     var _token = $('input[name="_token"]').val();
 
-    $(document).on('click', '#add', function() {
+    $(document).on('click', '#add', function () {
         var prenom_francais = $('#prenom_francais').text();
         var nom_francais = $('#nom_francais').text();
         var longitude = $('#longitude').text();
@@ -69,8 +69,10 @@ $(document).ready(function() {
                     tel: tel,
                     _token: _token
                 },
-                success: function(data) {
+                success: function (data) {
                     $('#message').html(data);
+                    $(".alert-message").alert();
+                    window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
                     fetch_data();
                 }
             });
@@ -79,7 +81,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('blur', '.column_name', function() {
+    $(document).on('blur', '.column_name', function () {
         var column_name = $(this).data("column_name");
         var column_value = $(this).text();
         var id = $(this).data("id");
@@ -94,8 +96,10 @@ $(document).ready(function() {
                     id: id,
                     _token: _token
                 },
-                success: function(data) {
+                success: function (data) {
                     $('#message').html(data);
+                    $(".alert-message").alert();
+                    window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
                 }
             })
         } else {
@@ -103,7 +107,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', '.delete', function() {
+    $(document).on('click', '.delete', function () {
         var id = $(this).attr("id");
         if (confirm("Are you sure you want to delete this records?")) {
             $.ajax({
@@ -113,8 +117,10 @@ $(document).ready(function() {
                     id: id,
                     _token: _token
                 },
-                success: function(data) {
+                success: function (data) {
                     $('#message').html(data);
+                    $(".alert-message").alert();
+                    window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
                     fetch_data();
                 }
             });
