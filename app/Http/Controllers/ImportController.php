@@ -35,7 +35,7 @@ class ImportController extends Controller
             );
             $id = DB::table('membres')->insert($data);
             if ($id > 0) {
-                echo '<div class="alert alert-success">Data Inserted</div>';
+                echo '<div class="alert alert-message alert-success p-1">Data Inserted</div>';
             }
         }
     }
@@ -49,7 +49,7 @@ class ImportController extends Controller
             DB::table('membres')
                 ->where('id', $request->id)
                 ->update($data);
-            echo '<div class="alert alert-success">Data Updated</div>';
+            echo '<div class="alert-message alert alert-success p-1">Data Updated</div>';
         }
     }
 
@@ -59,7 +59,7 @@ class ImportController extends Controller
             DB::table('membres')
                 ->where('id', $request->id)
                 ->delete();
-            echo '<div class="alert alert-success">Data Deleted</div>';
+            echo '<div class="alert-message alert alert-success p-1">Data Deleted</div>';
         }
     }
 }
