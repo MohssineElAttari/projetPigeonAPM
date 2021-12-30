@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function AssociatioGroupe()
+    public function associatioGroupe()
     {
-        return $this->hasOne(AssociationGroup::class, 'foreign_key', 'local_key');
+        return $this->hasOne(AssociationGroup::class);
     }
 }
