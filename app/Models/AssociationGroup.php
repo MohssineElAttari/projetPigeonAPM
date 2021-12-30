@@ -34,8 +34,12 @@ class AssociationGroup extends Authenticatable
     {
         return $this->hasMany(Concour::class, 'foreign_key', 'local_key');
     }
-    public function members()
+    // public function members()
+    // {
+    //     return $this->hasMany(Membre::class);
+    // }
+    public function users()
     {
-        return $this->hasMany(Membre::class);
+        return $this->belongsToMany(Membre::class)->using(Asso_member::class);
     }
 }
