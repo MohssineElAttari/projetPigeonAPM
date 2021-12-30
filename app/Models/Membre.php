@@ -19,4 +19,8 @@ class Membre extends Model
         'email',
         'tel'
     ];
+    public function associationGroup()
+    {
+        return $this->belongsToMany(AssociationGroup::class)->withDefault();
+    }
 }
