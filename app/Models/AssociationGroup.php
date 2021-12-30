@@ -42,4 +42,8 @@ class AssociationGroup extends Authenticatable
     {
         return $this->belongsToMany(Membre::class)->using(Asso_member::class);
     }
+    public function membres()
+    {
+        return $this->belongsToMany(Membre::class, 'asso_members','association_groups_id','membre_id');
+    }
 }
