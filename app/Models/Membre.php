@@ -19,8 +19,5 @@ class Membre extends Model
         'email',
         'tel'
     ];
-    public function associationGroup()
-    {
-        return $this->belongsToMany(AssociationGroup::class, 'asso_members','association_groups_id','membre_id');
-    }
+    
 }
