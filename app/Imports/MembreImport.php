@@ -19,7 +19,7 @@ class MembreImport implements ToCollection,WithHeadingRow,SkipsEmptyRows
 
     public function collection(Collection $rows)
     {
-        dd($rows);
+        // dd($rows);
         foreach ($rows as $row) {
             Membre::create([
                 'prenom_francais'     => $row['prenom_francais'],
