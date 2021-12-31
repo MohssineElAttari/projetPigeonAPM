@@ -1,21 +1,15 @@
-$(document).ready(function () {
+// const { result } = require("lodash");
 
+$(document).ready(function () {
+    let result =[];
     // fetch_data();
     // if (membres!="") {
     //     console.log(members);
     // }
-    if (members.length === 0) {
-        console.log("Array is empty!");
-    }
-    else {
-        console.log("====>", members);
-        show_data(members[0]);
-        // console.log("yes!")
-    }
-    // var array = ["id", "nom francais", "nom arabe", "prenom francais", "prenom arabe", "latitude", "longitude", "email", "tel", "date cration", "date modification", "nom association"];
-    function show_data(data) {
+    function parseArrayToArrayObject(data) {
 
         //https://stackoverflow.com/questions/66982431/convert-a-2d-array-with-first-rows-a-headers-to-object-javascript
+
         const fn = ([keys, ...values]) =>
             values.map(vs => Object.fromEntries(vs.map((v, i) => [keys[i], v])))
 
@@ -23,7 +17,19 @@ $(document).ready(function () {
 
         const result = fn(array)
 
-        // console.log(result)
+        return result;
+    }
+    if (members.length === 0) {
+        console.log("Array is empty!");
+    }
+    else {
+        console.log("====>", members);
+        result = parseArrayToArrayObject(members[0]);
+        console.log(result);
+        show_data(result);
+        // console.log("yes!")
+    }
+    function show_data(result) {
         var html = '';
         html += '<tr>';
         html += '<td contenteditable id="prenom_francais"></td>';
@@ -35,7 +41,7 @@ $(document).ready(function () {
         html += '<td contenteditable id="email"></td>';
         html += '<td contenteditable id="tel"></td>';
         html += '<td id="asso"></td>';
-        
+
         html +=
             '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td></tr>';
         for (var count = 0; count < result.length; count++) {
@@ -44,13 +50,13 @@ $(document).ready(function () {
             html +=
                 '<td contenteditable class="column_name" data-column_name="prenom_francais" data-id="' +
                 result[count].id + '">' + result[count]['prenom francais'] + '</td>';
-                html +=
+            html +=
                 '<td contenteditable class="column_name" data-column_name="prenom_arabe" data-id="' +
                 result[count].id + '">' + result[count]['prenom arabe'] + '</td>';
             html +=
                 '<td contenteditable class="column_name" data-column_name="nom_arabe" data-id="' +
                 result[count].id + '">' + result[count]['nom arabe'] + '</td>';
-                html +=
+            html +=
                 '<td contenteditable class="column_name" data-column_name="nom_francais" data-id="' +
                 result[count].id + '">' + result[count]['nom francais'] + '</td>';
             html +=
@@ -65,7 +71,7 @@ $(document).ready(function () {
             html +=
                 '<td contenteditable class="column_name" data-column_name="tel" data-id="' +
                 result[count].id + '">' + result[count].tel + '</td>';
-                html +=
+            html +=
                 '<td contenteditable class="column_name" data-column_name="asso" data-id="' +
                 result[count].id + '">' + result[count]['nom association'] + '</td>';
             html +=
@@ -123,6 +129,36 @@ $(document).ready(function () {
 
     var _token = $('input[name="_token"]').val();
 
+
+    $(document).on('click', '#analiser', function () {
+        console.log('done ');
+
+        if (result.length != 0 ) {
+            console.log("Full of");
+            $.ajax({
+                url: addLinke,
+                method: "POST",
+                data: {
+                    prenom_francais: prenom_francais,
+                    nom_francais: nom_francais,
+                    longitude: longitude,
+                    latitude: latitude,
+                    email: email,
+                    tel: tel,
+                    _token: _token
+                },
+                success: function (data) {
+                    $('#message').html(data);
+                    $(".alert-message").alert();
+                    window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
+                    fetch_data();
+                }
+            });
+        } else {
+            $('#message').html("<div class='alert alert-danger'>Il n'y a pas de données, faites une importation des données</div>");
+            console.log("Empty");
+        }
+    });
 
     $(document).on('click', '#add', function () {
         var prenom_francais = $('#prenom_francais').text();
