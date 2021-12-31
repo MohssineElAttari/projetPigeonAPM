@@ -16,20 +16,6 @@ class MembreImport implements ToCollection,WithHeadingRow,SkipsEmptyRows
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    // public function model(array $row)
-    // {
-    //     dd($row);
-    //     return new Membre([
-    //         'prenom_francais'     =>$row[0],
-    //         'prenom_arabe'     =>$row[1],
-    //         'nom_francais'    =>$row[2],
-    //         'nom_arabe'    =>$row[3],
-    //         'longitude'    =>$row[4],
-    //         'latitude'    =>$row[5],
-    //         'email'    =>$row[6],
-    //         'tel'    =>$row[7],
-    //     ]);
-    // }
 
     public function collection(Collection $rows)
     {
