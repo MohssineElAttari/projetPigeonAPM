@@ -25,7 +25,6 @@ class MembreController extends Controller
      */
     public function index()
     {
-        // dd(Auth::id());
         $id = DB::table('association_groups')
             ->join('users', 'association_groups.user_id', '=', 'users.id')
             ->select('association_groups.id')
@@ -37,8 +36,14 @@ class MembreController extends Controller
             ->where('asso_members.association_groups_id', $id)
             ->get();
         // dd($membres);
-        $associationGroup=DB::table('association_groups')->where('user_id', Auth::id())->first();
-        return view('dashboard/pages/membres', ['associationGroup' => $associationGroup,'membres' => $membres]);
+        $associationGroup = DB::table('association_groups')->where('user_id', Auth::id())->first();
+        return view('dashboard/pages/membres', ['associationGroup' => $associationGroup, 'membres' => $membres]);
+    }
+
+    function showdata()
+    {
+        $associationGroup = DB::table('association_groups')->where('user_id', Auth::id())->first();
+        return view('dashboard/pages/import', ['associationGroup' => $associationGroup]);
     }
 
     /**
@@ -70,8 +75,8 @@ class MembreController extends Controller
         $membre->tel = $request->all()['tel'];
         $membre->save();
         // $user=Auth::id();
-        $id=User::find(Auth::id())->associatioGroupe->id;
-                Asso_member::create([
+        $id = User::find(Auth::id())->associatioGroupe->id;
+        Asso_member::create([
             'association_groups_id' => $id,
             'membre_id' => $membre->id,
             'date_inscription' => date('Y-m-d H:i'),
@@ -132,7 +137,7 @@ class MembreController extends Controller
      */
     public function destroy($id)
     {
-        $membre=Membre::find($id);
+        $membre = Membre::find($id);
         $membre->delete();
         // return redirect('back');
         return back()->withInput();
@@ -140,81 +145,16 @@ class MembreController extends Controller
 
     public function fileImportExport()
     {
-       return view('dashboard/pages/membres');
-    }
-   
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function fileImport(Request $request) 
-    {
-        // dd(Excel::import(new MembreImport, $request->file('file')->store('temp')));
-        $data = Excel::import(new MembreImport, $request->file('file')->store('temp'));
-        return view('dashboard/pages/import', ['members' => $data]);
+        return view('dashboard/pages/membres');
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function fileExport() 
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileExport()
     {
         // dd();
         return Excel::download(new MembreExport, 'membres-collection.xlsx');
         return back();
-    } 
-
-    function showdata()
-    {
-        $associationGroup=DB::table('association_groups')->where('user_id', Auth::id())->first();
-       return view('dashboard/pages/import', ['associationGroup' => $associationGroup]);
-    }
-
-    function fetch_data(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = DB::table('membres')->orderBy('id', 'desc')->get();
-            echo json_encode($data);
-        }
-    }
-
-    function add_data(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = array(
-                'prenom_francais'    =>  $request->prenom_francais,
-                'nom_francais'     =>  $request->nom_francais,
-                'longitude'     =>  $request->longitude,
-                'latitude'     =>  $request->latitude,
-                'email'     =>  $request->email,
-                'tel'     =>  $request->tel,
-            );
-            $id = DB::table('membres')->insert($data);
-            if ($id > 0) {
-                echo '<div class="alert alert-message alert-success p-1">Data Inserted</div>';
-            }
-        }
-    }
-
-    function update_data(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = array(
-                $request->column_name =>  $request->column_value
-            );
-            DB::table('membres')
-                ->where('id', $request->id)
-                ->update($data);
-            echo '<div class="alert-message alert alert-success p-1">Data Updated</div>';
-        }
-    }
-
-    function delete_data(Request $request)
-    {
-        if ($request->ajax()) {
-            DB::table('membres')
-                ->where('id', $request->id)
-                ->delete();
-            echo '<div class="alert-message alert alert-success p-1">Data Deleted</div>';
-        }
     }
 }
