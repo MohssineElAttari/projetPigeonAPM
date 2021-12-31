@@ -80,7 +80,7 @@ $(document).ready(function () {
                     result[count].id + '">Delete</button></td></tr>';
             }
             $('tbody').html(html);
-        }else{
+        } else {
             $('#messageImport').html("<div class='alert-message alert alert-danger p-1'>Le fichier que vous souhaitez importer est vide</div>");
             $(".alert-message").alert();
             window.setTimeout(function () { $(".alert-message").alert('close'); }, 5000);
@@ -137,27 +137,24 @@ $(document).ready(function () {
 
 
     $(document).on('click', '#analiser', function () {
-        console.log('done ');
-
+        // console.log('done ');
+        console.log(result);
         if (result.length != 0) {
             console.log("Full of");
             $.ajax({
-                url: addLinke,
+                url: analiseData,
+                dataType: "json",
                 method: "POST",
                 data: {
-                    prenom_francais: prenom_francais,
-                    nom_francais: nom_francais,
-                    longitude: longitude,
-                    latitude: latitude,
-                    email: email,
-                    tel: tel,
-                    _token: _token
+                    result: result,
+                    _token: _token,
+                    name: "mohssine"
                 },
                 success: function (data) {
                     $('#message').html(data);
                     $(".alert-message").alert();
                     window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
-                    fetch_data();
+                    // fetch_data();
                 }
             });
         } else {
