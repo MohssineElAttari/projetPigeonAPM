@@ -23,7 +23,7 @@ class CreateMembresTable extends Migration
             $table->double('longitude');
             $table->string("email");
             $table->integer("tel");
-            $table->string("type");
+            // $table->string("type");
             $table->timestamps();
         });
     }
