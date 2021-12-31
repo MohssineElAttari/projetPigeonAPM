@@ -63,16 +63,21 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Import les la liste des membre</h4>
+                                    <h4 class="card-title">Import la liste des membres</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="demo-inline-spacing">
                                         <label for="file-upload" class="custom-file-upload">
                                             <i class="fa fa-cloud-upload"></i> Selectionner votre fichier le fichier excel
                                         </label>
-                                        <input id="file-upload" type="file" />
+                                        <form class="btn-outline-gradient-dark" action="{{ route('file-import') }}"
+                                            method="Post" enctype="multipart/form-data">
+                                            @csrf
+                                            <input id="file-upload" name="file" type="file" />
 
-                                        <button type="button" class="btn btn-relief-info">Importer</button>
+                                            <button type="submit" class="btn btn-relief-info">Importer</button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +89,9 @@
                 <div class="row" id="table-head">
                     <!-- BEGIN: Content-->
                     <div class="container box">
-                        <h3 align="center">la liste des membre</h3><br />
+                        {{-- <h3 align="center">la liste des membre</h3><br /> --}}
+                        <hr>
+                        <button type="button" class="btn btn-relief-warning mb-2">Analiser</button>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div id="message"></div>
