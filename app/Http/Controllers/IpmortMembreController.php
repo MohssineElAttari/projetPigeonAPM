@@ -43,7 +43,21 @@ class IpmortMembreController extends Controller
         if ($request->ajax()) {
             $data = array('members' => $request->result);
             $response = json_encode($data);
-            echo json_encode($response);
+            $values = $data['members'];
+            // dd($values);
+            // echo json_encode($response);
+            foreach ($values as $key => $value) {
+                $members = DB::table('membres')->where([
+                    ['nom_francais', $value['nom francais']],
+                    ['prenom_francais', $value['prenom francais']],
+                ]);
+                if (!$members->exists()) {
+                    $values[$key]['exist'] = 0;
+                }else {
+                    $values[$key]['exist'] = 1;
+                }
+            }
+            echo json_encode($values);
         }
     }
 
