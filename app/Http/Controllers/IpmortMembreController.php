@@ -38,11 +38,12 @@ class IpmortMembreController extends Controller
         // return redirect()->route('membre-mmport', ['associationGroup' => $associationGroup,'members' => $this->members]);
         return view('dashboard/pages/import', ['associationGroup' => $associationGroup, 'members' => $this->members]);
     }
-    function fetch_data(Request $request)
+    function analise_data(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->members;
-            echo json_encode($data);
+            $data = array('members' => $request->result);
+            $response = json_encode($data);
+            echo json_encode($response);
         }
     }
 
