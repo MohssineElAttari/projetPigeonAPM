@@ -10,7 +10,7 @@ class Asso_member extends Pivot
 {
     use HasFactory;
     public $incrementing = true;
-
+    protected $table = "asso_members";
     protected $fillable = [
         'association_groups_id',
         'membre_id',
