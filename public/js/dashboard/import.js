@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    fetch_data();
+    // fetch_data();
 
     function fetch_data() {
         $.ajax({
