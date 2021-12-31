@@ -26,6 +26,9 @@
             var addLinke = "{{ route('membre.add_data') }}";
             var deleteLinke = "{{ route('membre.delete_data') }}";
             var updateLinke = "{{ route('membre.update_data') }}";
+            var importLinke = "{{ route('file-import') }}";
+            var members = @json($members);
+            // alert(members);
         </script>
         {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
         <script defer src="{{ asset('js/dashboard/import.js') }}"></script>
@@ -100,11 +103,14 @@
                                         <thead>
                                             <tr>
                                                 <th>PRENOM</th>
+                                                <th>الإسم</th>
                                                 <th>NOM</th>
+                                                <th>النسب</th>
                                                 <th>LONGITUDE</th>
                                                 <th>LATITUDE</th>
                                                 <th>EAMIL</th>
                                                 <th>TÉLEPHON</th>
+                                                <th>Association</th>
                                             </tr>
                                         </thead>
                                         <tbody>
