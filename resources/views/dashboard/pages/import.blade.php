@@ -28,6 +28,7 @@
             var updateLinke = "{{ route('membre.update_data') }}";
             var importLinke = "{{ route('file-import') }}";
             var members = @json($members);
+            var analiseData = "{{ route('analise_data') }}";
             // alert(members);
         </script>
         {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
