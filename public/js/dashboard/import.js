@@ -1,12 +1,86 @@
 $(document).ready(function () {
 
     // fetch_data();
+    // if (membres!="") {
+    //     console.log(members);
+    // }
+    if (members.length === 0) {
+        console.log("Array is empty!");
+    }
+    else {
+        console.log("====>", members);
+        show_data(members[0]);
+        // console.log("yes!")
+    }
+    // var array = ["id", "nom francais", "nom arabe", "prenom francais", "prenom arabe", "latitude", "longitude", "email", "tel", "date cration", "date modification", "nom association"];
+    function show_data(data) {
+
+        //https://stackoverflow.com/questions/66982431/convert-a-2d-array-with-first-rows-a-headers-to-object-javascript
+        const fn = ([keys, ...values]) =>
+            values.map(vs => Object.fromEntries(vs.map((v, i) => [keys[i], v])))
+
+        const array = data
+
+        const result = fn(array)
+
+        // console.log(result)
+        var html = '';
+        html += '<tr>';
+        html += '<td contenteditable id="prenom_francais"></td>';
+        html += '<td contenteditable id="prenom_arabe"></td>';
+        html += '<td contenteditable id="nom_francais"></td>';
+        html += '<td contenteditable id="nom_arabe"></td>';
+        html += '<td contenteditable id="longitude"></td>';
+        html += '<td contenteditable id="latitude"></td>';
+        html += '<td contenteditable id="email"></td>';
+        html += '<td contenteditable id="tel"></td>';
+        html += '<td id="asso"></td>';
+        
+        html +=
+            '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td></tr>';
+        for (var count = 0; count < result.length; count++) {
+            console.log(result[count]);
+            html += '<tr>';
+            html +=
+                '<td contenteditable class="column_name" data-column_name="prenom_francais" data-id="' +
+                result[count].id + '">' + result[count]['prenom francais'] + '</td>';
+                html +=
+                '<td contenteditable class="column_name" data-column_name="prenom_arabe" data-id="' +
+                result[count].id + '">' + result[count]['prenom arabe'] + '</td>';
+            html +=
+                '<td contenteditable class="column_name" data-column_name="nom_arabe" data-id="' +
+                result[count].id + '">' + result[count]['nom arabe'] + '</td>';
+                html +=
+                '<td contenteditable class="column_name" data-column_name="nom_francais" data-id="' +
+                result[count].id + '">' + result[count]['nom francais'] + '</td>';
+            html +=
+                '<td contenteditable class="column_name" data-column_name="longitude" data-id="' +
+                result[count].id + '">' + result[count].longitude + '</td>';
+            html +=
+                '<td contenteditable class="column_name" data-column_name="latitude" data-id="' +
+                result[count].id + '">' + result[count].latitude + '</td>';
+            html +=
+                '<td contenteditable class="column_name" data-column_name="email" data-id="' +
+                result[count].id + '">' + result[count].email + '</td>';
+            html +=
+                '<td contenteditable class="column_name" data-column_name="tel" data-id="' +
+                result[count].id + '">' + result[count].tel + '</td>';
+                html +=
+                '<td contenteditable class="column_name" data-column_name="asso" data-id="' +
+                result[count].id + '">' + result[count]['nom association'] + '</td>';
+            html +=
+                '<td><button type="button" class="btn btn-danger btn-xs delete" id="' +
+                result[count].id + '">Delete</button></td></tr>';
+        }
+        $('tbody').html(html);
+    }
 
     function fetch_data() {
         $.ajax({
             url: "import-membre/fetch_data",
             dataType: "json",
             success: function (data) {
+                console.log(data);
                 var html = '';
                 html += '<tr>';
                 html += '<td contenteditable id="prenom_francais"></td>';
@@ -18,6 +92,7 @@ $(document).ready(function () {
                 html +=
                     '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td></tr>';
                 for (var count = 0; count < data.length; count++) {
+                    console.log(data[count]);
                     html += '<tr>';
                     html +=
                         '<td contenteditable class="column_name" data-column_name="prenom_francais" data-id="' +
@@ -47,6 +122,7 @@ $(document).ready(function () {
     }
 
     var _token = $('input[name="_token"]').val();
+
 
     $(document).on('click', '#add', function () {
         var prenom_francais = $('#prenom_francais').text();
