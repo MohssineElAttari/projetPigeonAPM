@@ -1,7 +1,7 @@
 // const { result } = require("lodash");
 
 $(document).ready(function () {
-    let result =[];
+    let result = [];
     // fetch_data();
     // if (membres!="") {
     //     console.log(members);
@@ -30,55 +30,61 @@ $(document).ready(function () {
         // console.log("yes!")
     }
     function show_data(result) {
-        var html = '';
-        html += '<tr>';
-        html += '<td contenteditable id="prenom_francais"></td>';
-        html += '<td contenteditable id="prenom_arabe"></td>';
-        html += '<td contenteditable id="nom_francais"></td>';
-        html += '<td contenteditable id="nom_arabe"></td>';
-        html += '<td contenteditable id="longitude"></td>';
-        html += '<td contenteditable id="latitude"></td>';
-        html += '<td contenteditable id="email"></td>';
-        html += '<td contenteditable id="tel"></td>';
-        html += '<td id="asso"></td>';
-
-        html +=
-            '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td></tr>';
-        for (var count = 0; count < result.length; count++) {
-            console.log(result[count]);
+        if (result.length != 0) {
+            var html = '';
             html += '<tr>';
+            html += '<td contenteditable id="prenom_francais"></td>';
+            html += '<td contenteditable id="prenom_arabe"></td>';
+            html += '<td contenteditable id="nom_francais"></td>';
+            html += '<td contenteditable id="nom_arabe"></td>';
+            html += '<td contenteditable id="longitude"></td>';
+            html += '<td contenteditable id="latitude"></td>';
+            html += '<td contenteditable id="email"></td>';
+            html += '<td contenteditable id="tel"></td>';
+            html += '<td id="asso"></td>';
+
             html +=
-                '<td contenteditable class="column_name" data-column_name="prenom_francais" data-id="' +
-                result[count].id + '">' + result[count]['prenom francais'] + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="prenom_arabe" data-id="' +
-                result[count].id + '">' + result[count]['prenom arabe'] + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="nom_arabe" data-id="' +
-                result[count].id + '">' + result[count]['nom arabe'] + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="nom_francais" data-id="' +
-                result[count].id + '">' + result[count]['nom francais'] + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="longitude" data-id="' +
-                result[count].id + '">' + result[count].longitude + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="latitude" data-id="' +
-                result[count].id + '">' + result[count].latitude + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="email" data-id="' +
-                result[count].id + '">' + result[count].email + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="tel" data-id="' +
-                result[count].id + '">' + result[count].tel + '</td>';
-            html +=
-                '<td contenteditable class="column_name" data-column_name="asso" data-id="' +
-                result[count].id + '">' + result[count]['nom association'] + '</td>';
-            html +=
-                '<td><button type="button" class="btn btn-danger btn-xs delete" id="' +
-                result[count].id + '">Delete</button></td></tr>';
+                '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td></tr>';
+            for (var count = 0; count < result.length; count++) {
+                console.log(result[count]);
+                html += '<tr>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="prenom_francais" data-id="' +
+                    result[count].id + '">' + result[count]['prenom francais'] + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="prenom_arabe" data-id="' +
+                    result[count].id + '">' + result[count]['prenom arabe'] + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="nom_arabe" data-id="' +
+                    result[count].id + '">' + result[count]['nom arabe'] + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="nom_francais" data-id="' +
+                    result[count].id + '">' + result[count]['nom francais'] + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="longitude" data-id="' +
+                    result[count].id + '">' + result[count].longitude + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="latitude" data-id="' +
+                    result[count].id + '">' + result[count].latitude + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="email" data-id="' +
+                    result[count].id + '">' + result[count].email + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="tel" data-id="' +
+                    result[count].id + '">' + result[count].tel + '</td>';
+                html +=
+                    '<td contenteditable class="column_name" data-column_name="asso" data-id="' +
+                    result[count].id + '">' + result[count]['nom association'] + '</td>';
+                html +=
+                    '<td><button type="button" class="btn btn-danger btn-xs delete" id="' +
+                    result[count].id + '">Delete</button></td></tr>';
+            }
+            $('tbody').html(html);
+        }else{
+            $('#messageImport').html("<div class='alert-message alert alert-danger p-1'>Le fichier que vous souhaitez importer est vide</div>");
+            $(".alert-message").alert();
+            window.setTimeout(function () { $(".alert-message").alert('close'); }, 5000);
         }
-        $('tbody').html(html);
     }
 
     function fetch_data() {
@@ -133,7 +139,7 @@ $(document).ready(function () {
     $(document).on('click', '#analiser', function () {
         console.log('done ');
 
-        if (result.length != 0 ) {
+        if (result.length != 0) {
             console.log("Full of");
             $.ajax({
                 url: addLinke,
@@ -155,7 +161,10 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $('#message').html("<div class='alert alert-danger'>Il n'y a pas de données, faites une importation des données</div>");
+            $('#message').html("<div class='alert-message alert alert-danger p-1'>Il n\'y a pas de données, faites une importation des données</div>");
+            $(".alert-message").alert();
+            window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
+            // show_data();
             console.log("Empty");
         }
     });
