@@ -13,6 +13,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use App\Exports\UsersExport;
 use App\Imports\MembreImport;
+use App\Models\AssociationGroup;
+use App\Models\User;
 
 class MembreController extends Controller
 {
@@ -67,9 +69,10 @@ class MembreController extends Controller
         $membre->email = $request->all()['email'];
         $membre->tel = $request->all()['tel'];
         $membre->save();
-
-        Asso_member::create([
-            'association_groups_id' => 1,
+        // $user=Auth::id();
+        $id=User::find(Auth::id())->associatioGroupe->id;
+                Asso_member::create([
+            'association_groups_id' => $id,
             'membre_id' => $membre->id,
             'date_inscription' => date('Y-m-d H:i'),
         ]);
@@ -145,9 +148,9 @@ class MembreController extends Controller
     */
     public function fileImport(Request $request) 
     {
-        // dd($request->file('file')->store('temp'));
-        Excel::import(new MembreImport, $request->file('file')->store('temp'));
-        return back();
+        // dd(Excel::import(new MembreImport, $request->file('file')->store('temp')));
+        $data = Excel::import(new MembreImport, $request->file('file')->store('temp'));
+        return view('dashboard/pages/import', ['members' => $data]);
     }
 
     /**
@@ -159,4 +162,59 @@ class MembreController extends Controller
         return Excel::download(new MembreExport, 'membres-collection.xlsx');
         return back();
     } 
+
+    function showdata()
+    {
+        $associationGroup=DB::table('association_groups')->where('user_id', Auth::id())->first();
+       return view('dashboard/pages/import', ['associationGroup' => $associationGroup]);
+    }
+
+    function fetch_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = DB::table('membres')->orderBy('id', 'desc')->get();
+            echo json_encode($data);
+        }
+    }
+
+    function add_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = array(
+                'prenom_francais'    =>  $request->prenom_francais,
+                'nom_francais'     =>  $request->nom_francais,
+                'longitude'     =>  $request->longitude,
+                'latitude'     =>  $request->latitude,
+                'email'     =>  $request->email,
+                'tel'     =>  $request->tel,
+            );
+            $id = DB::table('membres')->insert($data);
+            if ($id > 0) {
+                echo '<div class="alert alert-message alert-success p-1">Data Inserted</div>';
+            }
+        }
+    }
+
+    function update_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = array(
+                $request->column_name =>  $request->column_value
+            );
+            DB::table('membres')
+                ->where('id', $request->id)
+                ->update($data);
+            echo '<div class="alert-message alert alert-success p-1">Data Updated</div>';
+        }
+    }
+
+    function delete_data(Request $request)
+    {
+        if ($request->ajax()) {
+            DB::table('membres')
+                ->where('id', $request->id)
+                ->delete();
+            echo '<div class="alert-message alert alert-success p-1">Data Deleted</div>';
+        }
+    }
 }
