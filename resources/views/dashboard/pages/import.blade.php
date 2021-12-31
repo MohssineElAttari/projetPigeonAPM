@@ -94,7 +94,7 @@
                     <div class="container box">
                         {{-- <h3 align="center">la liste des membre</h3><br /> --}}
                         <hr>
-                        <button type="button" class="btn btn-relief-warning mb-2">Analiser</button>
+                        <button type="button" id="analiser" class="btn btn-relief-warning mb-2">Analiser</button>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div id="message"></div>
