@@ -10,13 +10,19 @@ class Concour extends Model
     // protected $table = "concours";
     use HasFactory;
     protected $fillable = [
-        'association_group_id'
+        'designation',
+        'type',
+        'etap',
+        'pourcentage',
+        'latitude',
+        'longitude',
+        'association_groups_id',
     ];
     /**
- * Get the post that owns the comment.
- */
-public function associationGroup()
-{
-    return $this->belongsTo(AssociationGroup::class, 'foreign_key', 'owner_key');
-}
+     * Get the post that owns the comment.
+     */
+    public function associationGroup()
+    {
+        return $this->belongsTo(AssociationGroup::class, 'foreign_key', 'owner_key');
+    }
 }
