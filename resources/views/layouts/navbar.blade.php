@@ -62,12 +62,12 @@
                     </li>
                     <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-toggle="dropdown"><i data-feather="layers"></i><span data-i18n="User Interface">Councours</span></a>
                         <ul class="dropdown-menu">
-                            <li data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ Request::is('concour') ? 'active' : '' }}" data-toggle="dropdown" data-i18n="Typography"><i data-feather="type"></i><span data-i18n="Typography">Gerer concours</span></a>
+                            <li data-menu="" class="{{ Request::is('concour') ? 'active' : '' }}"><a class="dropdown-item d-flex align-items-center" href="{{ route('concour') }}" data-toggle="dropdown" data-i18n="Typography"><i data-feather="type"></i><span data-i18n="Typography">Gerer concours</span></a>
                             </li>
-                            <li data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ Request::is('import-membre') ? 'active' : '' }}" data-toggle="dropdown" data-i18n="Colors"><i data-feather="droplet"></i><span data-i18n="Colors">Resultat</span></a>
+                            <li data-menu="" class="{{ Request::is('/dashboard/concour_resultat') ? 'active' : '' }}"><a class="dropdown-item d-flex align-items-center" href="{{ route('concour_resultat') }}" data-toggle="dropdown" data-i18n="Colors"><i data-feather="droplet"></i><span data-i18n="Colors">Resultat</span></a>
                             </li>
-                            <li data-menu=""><a class="dropdown-item d-flex align-items-center" href="{{ Request::is('import-membre') ? 'active' : '' }}" data-toggle="dropdown" data-i18n="Feather"><i data-feather="eye"></i><span data-i18n="Feather">membre</span></a>
-                            </li>
+                            {{-- <li data-menu="" class="{{ Request::is('concour/resultat') ? 'active' : '' }}"><a class="dropdown-item d-flex align-items-center" href="#" data-toggle="dropdown" data-i18n="Feather"><i data-feather="eye"></i><span data-i18n="Feather">membre</span></a>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-toggle="dropdown"><i data-feather="edit"></i><span data-i18n="Forms &amp; Tables">Resultat</span></a>
