@@ -132,7 +132,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Longitude
                                                                                 </label>
-                                                                                <input type="text" id="company-column"
+                                                                                <input type="number" id="company-column"
                                                                                     required class="form-control"
                                                                                     name="longitude"
                                                                                     placeholder="Longitude" />
@@ -142,7 +142,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="company-column">Latitude
                                                                                 </label>
-                                                                                <input type="text" id="company-column"
+                                                                                <input type="number" id="company-column"
                                                                                     required class="form-control"
                                                                                     name="latitude"
                                                                                     placeholder="Latitude" />
@@ -160,7 +160,7 @@
                                                                             <div class="form-group">
                                                                                 <label
                                                                                     for="email-id-column">Télephon</label>
-                                                                                <input type="tel" id="email-id-column"
+                                                                                <input type="number" id="email-id-column"
                                                                                     required class="form-control"
                                                                                     name="tel" placeholder="Télephone" />
                                                                             </div>
@@ -168,7 +168,7 @@
                                                                         <div class="col-12">
                                                                             <button type="submit"
                                                                                 class="btn btn-primary mr-1">Valider</button>
-                                                                            <button type="rest" class="close"
+                                                                            <button type="rest"
                                                                                 data-dismiss="modal"
                                                                                 class="btn btn-outline-secondary">Annuler</button>
                                                                         </div>
@@ -317,7 +317,7 @@
                                                                                 <div class="form-group">
                                                                                     <label for="company-column">Longitude
                                                                                     </label>
-                                                                                    <input type="text" id="company-column"
+                                                                                    <input type="number" id="company-column"
                                                                                         required
                                                                                         value="{{ $membre->longitude }}"
                                                                                         class="form-control"
@@ -329,7 +329,7 @@
                                                                                 <div class="form-group">
                                                                                     <label for="company-column">Latitude
                                                                                     </label>
-                                                                                    <input type="text" id="company-column"
+                                                                                    <input type="number" id="company-column"
                                                                                         required
                                                                                         value="{{ $membre->latitude }}"
                                                                                         class="form-control"
@@ -353,7 +353,7 @@
                                                                                 <div class="form-group">
                                                                                     <label
                                                                                         for="email-id-column">Télephon</label>
-                                                                                    <input type="tel" id="email-id-column"
+                                                                                    <input type="number" id="email-id-column"
                                                                                         required
                                                                                         value="{{ $membre->tel }}"
                                                                                         class="form-control" name="tel"
