@@ -236,7 +236,7 @@
                                 <label for="tel">
                                     Téléphone *
                                 </label>
-                                <input type="text" name="tel" id="tel"
+                                <input type="number" name="tel" id="tel"
                                        class="form-control @error('tel') is-invalid @enderror"
                                        value="{{ old('tel') }}" required>
                             </div>
@@ -249,7 +249,7 @@
                                     <label for="tel">
                                         fix *
                                     </label>
-                                    <input type="text" name="fix" id="tel"
+                                    <input type="number" name="fix" id="tel"
                                            class="form-control @error('fix') is-invalid @enderror"
                                            value="{{ old('fix') }}" required>
                                 </div>
