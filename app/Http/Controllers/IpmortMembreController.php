@@ -42,7 +42,7 @@ class IpmortMembreController extends Controller
     {
         if ($request->ajax()) {
             $data = array('members' => $request->result);
-            $response = json_encode($data);
+            // $response = json_encode($data);
             $values = $data['members'];
             // dd($values);
             // echo json_encode($response);
@@ -61,21 +61,15 @@ class IpmortMembreController extends Controller
         }
     }
 
-    function add_data(Request $request)
+    function insert_data(Request $request)
     {
         if ($request->ajax()) {
-            $data = array(
-                'prenom_francais'    =>  $request->prenom_francais,
-                'nom_francais'     =>  $request->nom_francais,
-                'longitude'     =>  $request->longitude,
-                'latitude'     =>  $request->latitude,
-                'email'     =>  $request->email,
-                'tel'     =>  $request->tel,
-            );
-            $id = DB::table('membres')->insert($data);
-            if ($id > 0) {
-                echo '<div class="alert alert-message alert-success p-1">Data Inserted</div>';
-            }
+            $data = array('members' => $request->result);
+            dd($data);
+            // $id = DB::table('membres')->insert($data);
+            // if ($id > 0) {
+            //     echo '<div class="alert alert-message alert-success p-1">Data Inserted</div>';
+            // }
         }
     }
 
