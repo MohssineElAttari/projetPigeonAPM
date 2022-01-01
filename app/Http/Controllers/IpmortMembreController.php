@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Imports\MembreImport;
+use App\Models\Asso_member;
+use App\Models\Membre;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,14 +32,19 @@ class IpmortMembreController extends Controller
         // $this->members = Excel::toArray(new stdClass(), $request->file('file'));
 
         // Get the csv rows as a collection
-        $associationGroup = DB::table('association_groups')->where('user_id', Auth::id())->first();
-        $this->members = Excel::toCollection(collect([]), $request->file('file'));
-        // Get the csv rows as an array
-        // $this->members = Excel::toArray(new stdClass(), $request->file('file'));
-        // dd($data);
-        // return back()->with('success', 'update success');
-        // return redirect()->route('membre-mmport', ['associationGroup' => $associationGroup,'members' => $this->members]);
-        return view('dashboard/pages/import', ['associationGroup' => $associationGroup, 'members' => $this->members]);
+        // dd($request);
+        // dd($request->file('file'));
+        if (!$request->file('file')) {
+            return back()->withErrors(['msg' => 'Faire une importation d\'un fichier']);
+        }else {
+            $associationGroup = DB::table('association_groups')->where('user_id', Auth::id())->first();
+            $this->members = Excel::toCollection(collect([]), $request->file('file'));
+            // return redirect()->route('membre-mmport', ['associationGroup' => $associationGroup,'members' => $this->members]);
+            // Get the csv rows as an array
+            // $this->members = Excel::toArray(new stdClass(), $request->file('file'));
+            // return back()->with('success', 'update success');
+            return view('dashboard/pages/import', ['associationGroup' => $associationGroup, 'members' => $this->members])->with('message', 'import success');
+        }
     }
     function analise_data(Request $request)
     {
@@ -53,7 +61,7 @@ class IpmortMembreController extends Controller
                 ]);
                 if (!$members->exists()) {
                     $values[$key]['exist'] = 0;
-                }else {
+                } else {
                     $values[$key]['exist'] = 1;
                 }
             }
@@ -64,12 +72,28 @@ class IpmortMembreController extends Controller
     function insert_data(Request $request)
     {
         if ($request->ajax()) {
-            $data = array('members' => $request->result);
-            dd($data);
-            // $id = DB::table('membres')->insert($data);
-            // if ($id > 0) {
-            //     echo '<div class="alert alert-message alert-success p-1">Data Inserted</div>';
-            // }
+            $data = $request->result;
+            foreach ($data as $key => $value) {
+                $membre = new Membre();
+
+                $membre->nom_francais = $value['nom francais'];
+                $membre->nom_arabe = $value['nom arabe'];
+                $membre->prenom_francais = $value['prenom francais'];
+                $membre->prenom_arabe = $value['prenom arabe'];
+                $membre->latitude = $value['latitude'];
+                $membre->longitude = $value['longitude'];
+                $membre->email = $value['email'];
+                $membre->tel = $value['tel'];
+                $membre->save();
+                // $asso_membre=new Asso_member();
+                $id = User::find(Auth::id())->associatioGroupe->id;
+                Asso_member::create([
+                    'association_groups_id' => $id,
+                    'membre_id' => $membre->id,
+                    'date_inscription' => date('Y-m-d H:i'),
+                ]);
+            }
+            echo '<div class="alert-message alert alert-success p-1">insert data</div>';
         }
     }
 
