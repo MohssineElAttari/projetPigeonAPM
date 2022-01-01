@@ -34,7 +34,7 @@ Route::middleware(['CheckActive', 'auth'])->group(function () {
     Route::post('file-import', [IpmortMembreController::class, 'fileImport'])->name('file-import');
     Route::get('file-import', [IpmortMembreController::class, 'showdata']);
     Route::post('/import-membre/analise_data', [IpmortMembreController::class, 'analise_data'])->name('analise_data');
-    Route::post('/import-membre/add_data', [IpmortMembreController::class, 'add_data'])->name('membre.add_data');
+    Route::post('/import-membre/insert_data', [IpmortMembreController::class, 'insert_data'])->name('membre.insert_data');
     Route::post('/import-membre/update_data', [IpmortMembreController::class, 'update_data'])->name('membre.update_data');
     Route::post('/import-membre/delete_data', [IpmortMembreController::class, 'delete_data'])->name('membre.delete_data');
 
