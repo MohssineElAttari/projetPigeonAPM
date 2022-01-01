@@ -20,6 +20,8 @@ class CreateConcoursTable extends Migration
             $table->string("poursentage");
             $table->double('latitude');
             $table->double('longitude');
+            $table->foreignId('association_groups_id')->constrained();
+
 
             $table->timestamps();
         });
