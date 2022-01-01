@@ -23,7 +23,7 @@
         </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script>
-            var addLinke = "{{ route('membre.add_data') }}";
+            var insertLinke = "{{ route('membre.insert_data') }}";
             var deleteLinke = "{{ route('membre.delete_data') }}";
             var updateLinke = "{{ route('membre.update_data') }}";
             var importLinke = "{{ route('file-import') }}";
@@ -31,6 +31,7 @@
             var analiseData = "{{ route('analise_data') }}";
             // alert(members);
         </script>
+        
         {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
         <script defer src="{{ asset('js/dashboard/import.js') }}"></script>
         {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -82,8 +83,11 @@
                                             <input id="file-upload" name="file" type="file" />
 
                                             <button type="submit" class="btn btn-relief-info">Importer</button>
+                                            
                                         </form>
-
+                                        @if($errors->any())
+                                        <h5 class="alert alert-danger" style="margin-bottom: 0;">{{$errors->first()}}</h5>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +102,7 @@
                         {{-- <h3 align="center">la liste des membre</h3><br /> --}}
                         <hr>
                         <button type="button" id="analiser" class="btn btn-relief-warning mb-2">Analiser</button>
-                        <button type="button" hidden id="enregistrer" class="btn btn-relief-success mb-2">Enregistrer</button>
+                        <button type="button" hidden id="enregistrer" conf class="btn btn-relief-success mb-2">Enregistrer</button>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div id="message"></div>
