@@ -161,36 +161,28 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#enregistrer', function () {
-
-        if (result.length != 0) {
-            $.ajax({
-                url: analiseData,
-                dataType: "json",
-                method: "POST",
-                data: {
-                    result: result,
-                    _token: _token,
-                },
-                success: function (data) {
-                    // $('#message').html(data);
-                    // $(".alert-message").alert();
-                    // window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
-                    // fetch_data();
-                    // data = JSON.parse(data);
-                    console.log(data);
-                    result = data;
-                    notExisting();
-                    show_data(result);
-                }
-            });
-        } else {
-            $('#message').html("<div class='alert-message alert alert-danger p-1'>Il n\'y a pas de données, faites une importation des données</div>");
-            $(".alert-message").alert();
-            window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
-            // show_data();
-            console.log("Empty");
-        }
-    });
+            if (confirm("Voulez-vous vraiment insérer des enregistrements ?")) {
+                $.ajax({
+                    url: insertLinke,
+                    // dataType: "json",
+                    method: "POST",
+                    data: {
+                        result: result,
+                        _token: _token,
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        result = [];
+                        $('#message').html(data);
+                        // $(".alert-message").alert();
+                        // window.setTimeout(function () { $(".alert-message").alert('close'); }, 3000);
+                        // data = JSON.parse(data);
+                        show_data(result);
+                    }
+                });
+            }
+        } 
+    );
 
     // $(document).on('click', '#add', function () {
     //     var prenom_francais = $('#prenom_francais').text();
