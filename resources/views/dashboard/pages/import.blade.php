@@ -98,6 +98,7 @@
                         {{-- <h3 align="center">la liste des membre</h3><br /> --}}
                         <hr>
                         <button type="button" id="analiser" class="btn btn-relief-warning mb-2">Analiser</button>
+                        <button type="button" hidden id="enregistrer" class="btn btn-relief-success mb-2">Enregistrer</button>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div id="message"></div>
