@@ -15,9 +15,12 @@ class CreateConcoursTable extends Migration
     {
         Schema::create('concours', function (Blueprint $table) {
             $table->id();
-            $table->boolean("designation");
+            $table->string("designation");
+            $table->string("type");
             $table->string("etap");
-            $table->string("poursentage");
+            $table->double("pourcentage");
+            $table->time('heure');
+            $table->date('date');
             $table->double('latitude');
             $table->double('longitude');
             $table->foreignId('association_groups_id')->constrained();
