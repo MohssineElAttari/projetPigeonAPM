@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Concour extends Model
 {
-    // protected $table = "concours";
+    protected $table = "concours";
     use HasFactory;
     protected $fillable = [
         'designation',
         'type',
         'etap',
         'pourcentage',
+        'heure',
+        'date',
         'latitude',
         'longitude',
-        'association_groups_id',
+        'association_group_id',
     ];
     /**
      * Get the post that owns the comment.
@@ -25,4 +27,8 @@ class Concour extends Model
     {
         return $this->belongsTo(AssociationGroup::class, 'foreign_key', 'owner_key');
     }
+    // public function associationGroups()
+    // {
+    //     return $this->belongsToMany(AssociationGroup::class)->using(Asso_member::class);
+    // }
 }
