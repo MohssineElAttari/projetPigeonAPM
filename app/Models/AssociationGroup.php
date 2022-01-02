@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class AssociationGroup extends Authenticatable
 {
     use HasFactory;
+    protected $table = "association_groups";
+
     protected $fillable = [
         'logo',
         'nom_asso',
@@ -30,14 +32,13 @@ class AssociationGroup extends Authenticatable
     {
         return $this->belongsTo(User::class, 'foreign_key', 'owner_key');
     }
-    public function concour()
+
+
+    public function concours()
     {
         return $this->hasMany(Concour::class, 'foreign_key', 'local_key');
     }
-    // public function members()
-    // {
-    //     return $this->hasMany(Membre::class);
-    // }
+
     public function users()
     {
         return $this->belongsToMany(Membre::class)->using(Asso_member::class);
