@@ -23,7 +23,7 @@ class CreateConcoursTable extends Migration
             $table->date('date');
             $table->double('latitude');
             $table->double('longitude');
-            $table->foreignId('association_groups_id')->constrained();
+            $table->foreignId('association_group_id')->constrained();
 
 
             $table->timestamps();
