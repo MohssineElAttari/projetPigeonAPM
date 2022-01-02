@@ -61,14 +61,6 @@
                                                 </button>
                                             </div>
 
-                                            <form class="btn-outline-gradient-dark" action="{{ route('file-export') }}"
-                                                method="GET" enctype="multipart/form-data">
-                                                @csrf
-                                                <button type="submit" class="btn btn-gradient-dark">
-                                                    Exporte
-                                                </button>
-                                            </form>
-
                                             <!-- Modal -->
                                             <div class="modal fade text-left" id="test" tabindex="-1" role="dialog"
                                                 aria-labelledby="myModalLabel33" aria-hidden="true">

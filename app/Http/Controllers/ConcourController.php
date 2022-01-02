@@ -13,24 +13,10 @@ class ConcourController extends Controller
 {
     public function index()
     {
-        //    dd(Auth::id());
-        //    $id = DB::table('association_groups')
-        //        ->join('users', 'association_groups.user_id', '=', 'users.id')
-        //        ->select('association_groups.id')
-        //        ->where('association_groups.user_id', Auth::id())
-        //        ->first()->id;
-        //    $concours = DB::table('concours')
-        //        ->join('asso_members', 'asso_members.concour_id', '=', 'concours.id')
-        //        ->select('concours.*')
-        //        ->where('asso_members.association_groups_id', $id)
-        //        ->get();
-        //    dd($concours);
-        $id_asso = User::find(Auth::id())->associatioGroupe->id;
-        // dd($id_asso);
-        $concours=AssociationGroup::find($id_asso)->concour;
-        dd($concours);
-        $associationGroup = DB::table('association_groups')->where('user_id', Auth::id())->first();
-        return view('dashboard/pages/concours', ['associationGroup' => $associationGroup, 'concours' => $concours]);
+
+        $asso = User::find(Auth::id())->associatioGroupe;
+        $concours = Concour::where('association_group_id', $asso->id)->get()->all();
+        return view('dashboard/pages/concours', ['associationGroup' => $asso, 'concours' => $concours]);
     }
 
     /**
@@ -51,24 +37,18 @@ class ConcourController extends Controller
      */
     public function store(Request $request)
     {
-        //    $concour = new Concour();
-        // //    $concour->prenom_francais = $request->all()['prenom_francais'];
-        // //    $concour->prenom_arabe = $request->all()['prenom_arabe'];
-        // //    $concour->nom_francais = $request->all()['nom_francais'];
-        // //    $concour->nom_arabe = $request->all()['nom_arabe'];
-        // //    $concour->longitude = $request->all()['longitude'];
-        // //    $concour->latitude = $request->all()['latitude'];
-        // //    $concour->email = $request->all()['email'];
-        // //    $concour->tel = $request->all()['tel'];
-        //    $concour->save();
-
-        // //    Asso_member::create([
-        // //        'association_groups_id' => 1,
-        // //        'concour_id' => $concour->id,
-        // //        'date_inscription' => date('Y-m-d H:i'),
-        // //    ]);
-
-        //    return $this->index();
+        $concour = new Concour();
+        $concour->designation = $request->all()['designation'];
+        $concour->type = $request->all()['type'];
+        $concour->etap = $request->all()['etap'];
+        $concour->pourcentage = $request->all()['pourcentage'];
+        $concour->heure = $request->all()['heure'];
+        $concour->date = $request->all()['date'];
+        $concour->latitude = $request->all()['latitude'];
+        $concour->longitude = $request->all()['longitude'];
+        $concour->association_group_id = User::find(Auth::id())->associatioGroupe->id;
+        $concour->save();
+        return $this->index();
     }
 
     /**
@@ -102,17 +82,17 @@ class ConcourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //    $concour = Concour::find($id);
-        //    $concour->prenom_francais = $request->all()['prenom_francais'];
-        //    $concour->prenom_arabe = $request->all()['prenom_arabe'];
-        //    $concour->nom_francais = $request->all()['nom_francais'];
-        //    $concour->nom_arabe = $request->all()['nom_arabe'];
-        //    $concour->longitude = $request->all()['longitude'];
-        //    $concour->latitude = $request->all()['latitude'];
-        //    $concour->email = $request->all()['email'];
-        //    $concour->tel = $request->all()['tel'];
-        //    $concour->save();
-        //    return back()->with('success', 'update success');
+           $concour = Concour::find($id);
+           $concour->prenom_francais = $request->all()['prenom_francais'];
+           $concour->prenom_arabe = $request->all()['prenom_arabe'];
+           $concour->nom_francais = $request->all()['nom_francais'];
+           $concour->nom_arabe = $request->all()['nom_arabe'];
+           $concour->longitude = $request->all()['longitude'];
+           $concour->latitude = $request->all()['latitude'];
+           $concour->email = $request->all()['email'];
+           $concour->tel = $request->all()['tel'];
+           $concour->save();
+           return back()->with('success', 'update success');
     }
 
     /**
@@ -123,10 +103,10 @@ class ConcourController extends Controller
      */
     public function destroy($id)
     {
-        //    $concour=Concour::find($id);
-        //    $concour->delete();
-        //    // return redirect('back');
-        //    return back()->withInput();
+           $concour=Concour::find($id);
+           $concour->delete();
+            // return redirect('back');
+           return back()->withInput();
     }
 
     public function fileImportExport()
