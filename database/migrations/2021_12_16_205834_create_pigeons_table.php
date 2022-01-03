@@ -16,7 +16,7 @@ class CreatePigeonsTable extends Migration
         Schema::create('pigeons', function (Blueprint $table) {
             $table->id();
             $table->integer("numero_bague");
-            $table->double('participent');
+            // $table->double('participent');
             $table->time('heure');
             $table->date('date');
             $table->foreignId('membre_id')->constrained();

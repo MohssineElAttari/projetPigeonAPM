@@ -6,7 +6,7 @@
 <!-- END: Navbar-->
 @section('content')
     @push('head')
-    {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
+        {{-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
 
         {{-- <script src="{{asset('vendors/dashboard/js/ui/jquery.sticky.js')}}"></script> --}}
         {{-- <script defer src="{{ asset('vendors/dashboard/js/forms/validation/jquery.validate.min.js') }}"></script> --}}
@@ -84,57 +84,66 @@
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    for="first-name-column">Prénom</label>
-                                                                                <input type="text" id="first-name-column"
+                                                                                    for="first-name-column">Designation</label>
+                                                                                <input type="text" id="designation-column"
                                                                                     required class="form-control"
-                                                                                    placeholder="Entrer le péenom de concour"
-                                                                                    name="prenom_francais" />
+                                                                                    placeholder="Entrer designation du concour"
+                                                                                    name="designation" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label for="last-name-column">الإسم
-                                                                                    الشخصي</label>
-                                                                                <input type="text" id="last-name-column"
-                                                                                    required class="form-control"
-                                                                                    placeholder="أدخل الإسم الشحصي للعضو"
-                                                                                    name="prenom_arabe" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-6 col-12">
-                                                                            <div class="form-group">
-                                                                                <label for="city-column">Nom</label>
-                                                                                <input type="text" id="city-column" required
+                                                                                <label for="type-column">Type</label>
+                                                                                <input type="text" id="type-column" required
                                                                                     class="form-control"
-                                                                                    placeholder="Entrer le nom de concour"
-                                                                                    name="nom_francais" />
+                                                                                    placeholder="entrer le type de concour"
+                                                                                    name="type" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label for="country-floating">الإسم
-                                                                                    العائلي</label>
-                                                                                <input type="text" id="country-floating"
+                                                                                <label for="etap-floating">Etap du
+                                                                                    concour</label>
+                                                                                <input type="text" id="etap-floating"
                                                                                     required class="form-control"
-                                                                                    name="nom_arabe"
-                                                                                    placeholder="أدخل الإسم العائلي للعضو" />
+                                                                                    name="etap"
+                                                                                    placeholder="entrer l'étap du concour" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label for="company-column">Longitude
-                                                                                </label>
-                                                                                <input type="text" id="company-column"
+                                                                                <label for="pourcentage-floating">Pourcentage du
+                                                                                    concour</label>
+                                                                                <input type="number" id="pourcentage-floating"
                                                                                     required class="form-control"
-                                                                                    name="longitude"
-                                                                                    placeholder="Longitude" />
+                                                                                    name="pourcentage"
+                                                                                    placeholder="entrer le pourcentage du concour" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label for="company-column">Latitude
+                                                                                <label for="heure-column">Heure
                                                                                 </label>
-                                                                                <input type="text" id="company-column"
+                                                                                <input type="time" id="heure-column"
+                                                                                    required class="form-control"
+                                                                                    name="heure"
+                                                                                    placeholder="heure départ concour" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="date-column">date
+                                                                                </label>
+                                                                                <input type="date" id="date-column" required
+                                                                                    class="form-control" name="date"
+                                                                                    placeholder="entrer la date départ du concour" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                    for="latitude-id-column">Latitude</label>
+                                                                                <input type="number" id="latitude-id-column"
                                                                                     required class="form-control"
                                                                                     name="latitude"
                                                                                     placeholder="Latitude" />
@@ -142,26 +151,18 @@
                                                                         </div>
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label for="email-id-column">Email</label>
-                                                                                <input type="email" id="email-id-column"
-                                                                                    required class="form-control"
-                                                                                    name="email" placeholder="Email" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-6 col-12">
-                                                                            <div class="form-group">
                                                                                 <label
-                                                                                    for="email-id-column">Télephon</label>
-                                                                                <input type="tel" id="email-id-column"
-                                                                                    required class="form-control"
-                                                                                    name="tel" placeholder="Télephone" />
+                                                                                    for="email-id-column">Longitude</label>
+                                                                                <input type="number"
+                                                                                    id="Longitude-id-column" required
+                                                                                    class="form-control" name="longitude"
+                                                                                    placeholder="Longitude" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <button type="submit"
                                                                                 class="btn btn-primary mr-1">Valider</button>
-                                                                            <button type="rest"
-                                                                                data-dismiss="modal"
+                                                                            <button type="rest" data-dismiss="modal"
                                                                                 class="btn btn-outline-secondary">Annuler</button>
                                                                         </div>
                                                                     </div>
@@ -181,12 +182,14 @@
                                 <table class="table">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>Prenom</th>
-                                            <th>Nom</th>
-                                            <th>Longitude </th>
+                                            <th>Designation</th>
+                                            <th>Type</th>
+                                            <th>Etap</th>
+                                            <th>Pourcentage</th>
+                                            <th>Date</th>
+                                            <th>Heure</th>
                                             <th>Latitude</th>
-                                            <th>Eamil</th>
-                                            <th>Télephon</th>
+                                            <th>Longitude</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -201,12 +204,14 @@
                                         @foreach ($concours as $concour)
 
                                             <tr>
-                                                <td>{{ $concour->prenom_francais }}</td>
-                                                <td>{{ $concour->nom_francais }}</td>
-                                                <td>{{ $concour->longitude }}</td>
+                                                <td>{{ $concour->designation }}</td>
+                                                <td>{{ $concour->type }}</td>
+                                                <td>{{ $concour->etap }}</td>
+                                                <td>{{ $concour->pourcentage }}</td>
+                                                <td>{{ $concour->date }}</td>
+                                                <td>{{ $concour->heur }}</td>
                                                 <td>{{ $concour->latitude }}</td>
-                                                <td>{{ $concour->email }}</td>
-                                                <td>{{ $concour->tel }}</td>
+                                                <td>{{ $concour->longitude }}</td>
                                                 <td>
                                                     <div class="dt-buttons d-inline-flex">
                                                         <!-- Button trigger modal -->
@@ -256,60 +261,80 @@
                                                                 </div>
                                                                 <div class="card">
                                                                     <div class="card-body">
-
                                                                         <div class="row">
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
                                                                                     <label
-                                                                                        for="first-name-column">Prénom</label>
+                                                                                        for="designation-column">Designation</label>
                                                                                     <input type="text"
-                                                                                        id="first-name-column"
-                                                                                        value="{{ $concour->prenom_francais }}"
+                                                                                        id="designation-column"
+                                                                                        value="{{ $concour->designation }}"
                                                                                         required class="form-control"
-                                                                                        placeholder="Entrer le péenom de concour"
-                                                                                        name="prenom_francais" />
+                                                                                        placeholder="Entrer la designation du concour"
+                                                                                        name="designation" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="last-name-column">الإسم
-                                                                                        الشخصي</label>
-                                                                                    <input type="text" id="last-name-column"
+                                                                                    <label for="type-column">type</label>
+                                                                                    <input type="text" id="type-column"
                                                                                         required
-                                                                                        value="{{ $concour->prenom_arabe }}"
+                                                                                        value="{{ $concour->type }}"
                                                                                         class="form-control"
-                                                                                        placeholder="أدخل الإسم الشحصي للعضو"
-                                                                                        name="prenom_arabe" />
+                                                                                        placeholder="entre le type de concour"
+                                                                                        name="type" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="city-column">Nom</label>
-                                                                                    <input type="text" id="city-column"
+                                                                                    <label for="etap-column">Etap</label>
+                                                                                    <input type="text" id="etap-column"
                                                                                         required
-                                                                                        value="{{ $concour->nom_francais }}"
+                                                                                        value="{{ $concour->etap }}"
                                                                                         class="form-control"
-                                                                                        placeholder="Entrer le nom de concour"
-                                                                                        name="nom_francais" />
+                                                                                        placeholder="Entrer l'étap du concour"
+                                                                                        name="etap" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="country-floating">الإسم
-                                                                                        العائلي</label>
-                                                                                    <input type="text" id="country-floating"
+                                                                                    <label for="pourcentage-column">pourcentage</label>
+                                                                                    <input type="number" id="pourcentage-column"
                                                                                         required
-                                                                                        value="{{ $concour->nom_arabe }}"
+                                                                                        value="{{ $concour->pourcentage }}"
                                                                                         class="form-control"
-                                                                                        name="nom_arabe"
-                                                                                        placeholder="أدخل الإسم العائلي للعضو" />
+                                                                                        placeholder="Entrer Pourcentage du concour"
+                                                                                        name="pourcentage" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="country-floating">Date
+                                                                                        concour</label>
+                                                                                    <input type="date" id="date-floating"
+                                                                                        required
+                                                                                        value="{{ $concour->date }}"
+                                                                                        class="form-control" name="date"
+                                                                                        placeholder="entrer la date du concour" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="email-id-column">Heure</label>
+
+                                                                                    <input type="time" id="heure-id-column"
+                                                                                        required
+                                                                                        value="{{ $concour->heure }}"
+                                                                                        class="form-control" name="heure"
+                                                                                        placeholder="Heure" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
                                                                                     <label for="company-column">Longitude
                                                                                     </label>
-                                                                                    <input type="text" id="company-column"
+                                                                                    <input type="number" id="company-column"
                                                                                         required
                                                                                         value="{{ $concour->longitude }}"
                                                                                         class="form-control"
@@ -321,35 +346,12 @@
                                                                                 <div class="form-group">
                                                                                     <label for="company-column">Latitude
                                                                                     </label>
-                                                                                    <input type="text" id="company-column"
+                                                                                    <input type="number" id="company-column"
                                                                                         required
                                                                                         value="{{ $concour->latitude }}"
                                                                                         class="form-control"
                                                                                         name="latitude"
                                                                                         placeholder="Latitude" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6 col-12">
-                                                                                <div class="form-group">
-                                                                                    <label
-                                                                                        for="email-id-column">Email</label>
-
-                                                                                    <input type="email" id="email-id-column"
-                                                                                        required
-                                                                                        value="{{ $concour->email }}"
-                                                                                        class="form-control" name="email"
-                                                                                        placeholder="Email" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6 col-12">
-                                                                                <div class="form-group">
-                                                                                    <label
-                                                                                        for="email-id-column">Télephon</label>
-                                                                                    <input type="tel" id="email-id-column"
-                                                                                        required
-                                                                                        value="{{ $concour->tel }}"
-                                                                                        class="form-control" name="tel"
-                                                                                        placeholder="Télephone" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-12">
@@ -393,5 +395,3 @@
     @include('layouts.footer')
 @endsection
 <!-- END: Footer-->
-
-
