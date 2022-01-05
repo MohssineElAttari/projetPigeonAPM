@@ -36,7 +36,7 @@ class IpmortMembreController extends Controller
         // dd($request->file('file'));
         if (!$request->file('file')) {
             return back()->withErrors(['msg' => 'Faire une importation d\'un fichier']);
-        }else {
+        } else {
             $associationGroup = DB::table('association_groups')->where('user_id', Auth::id())->first();
             $this->members = Excel::toCollection(collect([]), $request->file('file'));
             // return redirect()->route('membre-mmport', ['associationGroup' => $associationGroup,'members' => $this->members]);
@@ -54,11 +54,15 @@ class IpmortMembreController extends Controller
             $values = $data['members'];
             // dd($values);
             // echo json_encode($response);
+            $id = User::find(Auth::id())->associatioGroupe->id;
             foreach ($values as $key => $value) {
-                $members = DB::table('membres')->where([
-                    ['nom_francais', $value['nom francais']],
-                    ['prenom_francais', $value['prenom francais']],
-                ]);
+                $members = DB::table('membres')
+                    ->join('asso_members', 'membres.id', '=', 'asso_members.membre_id')
+                    ->where([
+                        ['membres.nom_francais', $value['nom francais']],
+                        ['membres.prenom_francais', $value['prenom francais']],
+                        ['asso_members.association_groups_id', $id],
+                    ]);
                 if (!$members->exists()) {
                     $values[$key]['exist'] = 0;
                 } else {
