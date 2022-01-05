@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\ConcourController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IpmortMembreController;
 use App\Http\Controllers\MembreController;
@@ -53,6 +54,8 @@ Route::middleware(['CheckActive', 'auth'])->group(function () {
     Route::post('/dashboard/concour/delete/{id}', [ConcourController::class, 'destroy'])->name('concour.delete');
     Route::post('/dashboard/concour/update/{id}', [ConcourController::class, 'update'])->name('concour.update');
 
+    Route::get('file', [FileController::class, 'index'])->name('file');
+    Route::post('file', [FileController::class, 'store'])->name('file.store');
 
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.perform');
 });
