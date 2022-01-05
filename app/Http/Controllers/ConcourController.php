@@ -82,17 +82,17 @@ class ConcourController extends Controller
      */
     public function update(Request $request, $id)
     {
-           $concour = Concour::find($id);
-           $concour->prenom_francais = $request->all()['prenom_francais'];
-           $concour->prenom_arabe = $request->all()['prenom_arabe'];
-           $concour->nom_francais = $request->all()['nom_francais'];
-           $concour->nom_arabe = $request->all()['nom_arabe'];
-           $concour->longitude = $request->all()['longitude'];
-           $concour->latitude = $request->all()['latitude'];
-           $concour->email = $request->all()['email'];
-           $concour->tel = $request->all()['tel'];
-           $concour->save();
-           return back()->with('success', 'update success');
+        $concour = Concour::find($id);
+        $concour->designation = $request->all()['designation'];
+        $concour->type = $request->all()['type'];
+        $concour->etap = $request->all()['etap'];
+        $concour->pourcentage = $request->all()['pourcentage'];
+        $concour->heure = $request->all()['heure'];
+        $concour->date = $request->all()['date'];
+        $concour->latitude = $request->all()['latitude'];
+        $concour->longitude = $request->all()['longitude'];
+        $concour->save();
+        return back()->with('success', 'update success');
     }
 
     /**
@@ -103,10 +103,9 @@ class ConcourController extends Controller
      */
     public function destroy($id)
     {
-           $concour=Concour::find($id);
-           $concour->delete();
-            // return redirect('back');
-           return back()->withInput();
+        $concour = Concour::find($id);
+        $concour->delete();
+        return back()->withInput();
     }
 
     public function fileImportExport()
